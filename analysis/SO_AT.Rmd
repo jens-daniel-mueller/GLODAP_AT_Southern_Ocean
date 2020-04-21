@@ -25,3 +25,158 @@ library(lubridate)
 ```{r ggplot_theme, include = FALSE}
 theme_set(theme_bw())
 ```
+
+# Subsetting criteria
+
+```{r criteria}
+
+year_start  <- 2004
+year_end    <- 2017
+depth_lower_limit <- 500
+
+```
+
+
+# Read summarized SO data file
+
+```{r reopen_GLODAP}
+
+GLODAP_SO <- read_csv(here::here("data/_summarized_data_files", "GLODAPv2.2019_Merged_Master_File_JM_SO.csv"),
+                   guess_max = 1e5)
+
+# GLODAP_SO <- GLODAP_SO %>% 
+#   mutate(decade = as.factor(decade))
+
+GLODAP_SO <- GLODAP_SO %>% 
+  filter(!is.na(depth)) %>% 
+  filter(year >= year_start, year <= year_end,
+         depth <= depth_lower_limit)
+
+```
+
+# Vertical gridding
+
+```{r vertical_gridding}
+
+GLODAP_SO <- GLODAP_SO %>% 
+  mutate(depth_grid = cut(depth, seq(0,5000, 50), include.lowest = TRUE))
+
+GLODAP_SO_depth_grid <- GLODAP_SO %>% 
+  select(date, year, month, latitude, longitude, tco2, talk, depth, depth_grid) %>% 
+  group_by(depth_grid, year, month) %>% 
+  summarise_all(lst(mean, sd, min, max), na.rm=TRUE) %>% 
+  ungroup()
+
+```
+
+# Distribution of observations
+
+## Longitudinal distribution
+
+```{r observations_longitudinal_distribution}
+
+GLODAP_SO_depth_grid %>% 
+  ggplot(aes(longitude_mean))+
+  geom_histogram(binwidth = 20)+
+  facet_grid(year~.)
+
+```
+
+## Surface map
+
+```{r observations_map}
+
+map_southpole <- borders("world", colour="gray60", fill="gray60", ylim = c(-90,-25)) # create a layer of borders
+
+GLODAP_SO %>% 
+  filter(!is.na(tco2)) %>% 
+  ggplot(aes(longitude,latitude))+
+  map_southpole+
+  geom_point()+
+  scale_fill_viridis_c(name = "SST (°C)", option = "plasma", na.value = "black")+
+  coord_map("ortho", orientation = c(-90, 0, 0), ylim = c(-90,-25))+
+  geom_hline(yintercept = c(-30, -65))+
+  theme(axis.text = element_blank(),
+        axis.title = element_blank(),
+        axis.ticks = element_blank())+
+  facet_wrap(~year)
+  
+  
+
+```
+
+
+# Alkalinity
+
+## Time series
+
+```{r talk_time_series}
+
+GLODAP_SO %>% 
+  ggplot(aes(date, talk, col=depth_grid))+
+  geom_point()+
+  facet_wrap(~depth_grid)
+
+```
+
+# Dissolved inorganic carbon
+
+## Time series
+
+```{r tCO2_time_series}
+
+GLODAP_SO %>% 
+  ggplot(aes(date, tco2, col=depth_grid))+
+  geom_point()+
+  facet_wrap(~depth_grid)
+
+```
+
+```{r tCO2_talk_ratio_time_series}
+
+GLODAP_SO %>% 
+  ggplot(aes(date, tco2/talk, col=depth_grid))+
+  geom_point()+
+  facet_wrap(~depth_grid)
+
+```
+
+## Time series depth grid
+
+```{r tCO2_depth_grid_time_series}
+
+GLODAP_SO_depth_grid %>% 
+  ggplot(aes(date_mean, tco2_mean, col=depth_grid))+
+  geom_path()+
+  geom_point()+
+  facet_wrap(~depth_grid)
+
+```
+
+## Seasonality
+
+```{r tCO2_depth_grid_seasonality}
+
+GLODAP_SO_depth_grid %>% 
+  ggplot(aes(month, tco2_mean, col=depth_grid))+
+  geom_point()+
+  scale_x_continuous(breaks = seq(1,12,2))+
+  facet_wrap(~depth_grid)
+
+```
+
+```{r tCO2_talk_ratio_depth_grid_seasonality}
+
+GLODAP_SO_depth_grid %>% 
+  ggplot(aes(month, tco2_mean/talk_mean, col=depth_grid))+
+  geom_point()+
+  scale_x_continuous(breaks = seq(1,12,2))+
+  facet_wrap(~depth_grid)
+
+```
+
+
+# Open tasks / questions
+
+- found several rows with depth NA. What is that? So far excluded from analysis
+

@@ -3,8 +3,6 @@ output_dir: ../docs
 navbar:
   title: GLODAP
   left:
-  - text: Home
-    href: index.html
   - text: Data base
     href: data_base.html
   - text: Southern Ocean AT
