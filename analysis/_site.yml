@@ -1,12 +1,14 @@
 name: Alkalinity in the Southern Ocean based on GLODAP data
 output_dir: ../docs
 navbar:
-  title: SO -> AT
+  title: GLODAP
   left:
   - text: Home
     href: index.html
   - text: Data base
     href: data_base.html
+  - text: Southern Ocean AT
+    href: SO_AT.html
   right:
   - icon: fa-github
     text: Source code
