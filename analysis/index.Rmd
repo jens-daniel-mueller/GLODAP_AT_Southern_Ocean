@@ -8,4 +8,9 @@ editor_options:
   chunk_output_type: console
 ---
 
-Welcome to my research website.
+On this website we present our ongoing ambition to assess the alkalinity variability in the Southern Ocean based on GLODAP data.
+
+Please navigate trough the navbar on top to take a look at the various chapters of this project.
+The links in the upper right corner bring you to the source code of this project and back to Jens' main homepage.
+
+(c) Dr. Jens Daniel Müller
