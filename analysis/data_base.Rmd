@@ -1,6 +1,6 @@
 ---
 title: "Data base"
-author: "Jens Daniel Müller & Lara Burchardt"
+author: "Jens Daniel Müller"
 date:  "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
   workflowr::wflow_html:
@@ -18,9 +18,110 @@ knitr::opts_chunk$set(warning=FALSE, message=FALSE)
 
 ```{r library, message=FALSE, warning=FALSE}
 library(tidyverse)
+library(lubridate)
 ```
 
 
 ```{r ggplot_theme, include = FALSE}
 theme_set(theme_bw())
+```
+
+# Subsetting criteria
+
+```{r criteria}
+
+SO_lat_high <- -30
+SO_lat_low <- -65
+
+```
+
+# Overview GLODAPv2-2019
+
+Saptio temporal distribution of tCO2 and talk data.
+
+```{r rewrite_GLODAP_master_file, eval=FALSE}
+
+GLODAP <- read_csv(here::here("data", "GLODAPv2.2019_Merged_Master_File.csv"),
+                   na = "-9999",
+                   guess_max = 1e5)
+
+# relevant columns
+GLODAP <- GLODAP %>% 
+  select(cruise:phtsqc)
+
+GLODAP <- GLODAP %>% 
+  mutate(date = ymd(paste(year, month, day)),
+         decade = as.factor(floor(year / 10) * 10))
+
+GLODAP  %>%  write_csv(here::here("data/_summarized_data_files", "GLODAPv2.2019_Merged_Master_File_JM.csv"))
+
+```
+
+```{r reopen_GLODAP}
+
+GLODAP <- read_csv(here::here("data/_summarized_data_files", "GLODAPv2.2019_Merged_Master_File_JM.csv"),
+                   guess_max = 1e5)
+
+GLODAP <- GLODAP %>% 
+  mutate(decade = as.factor(decade))
+
+```
+
+```{r histogramm_tco2}
+
+GLODAP %>% 
+  filter(!is.na(tco2)) %>% 
+  ggplot(aes(latitude, fill=decade))+
+  geom_vline(xintercept = -30, col="red")+
+  geom_histogram(binwidth = 10, col="black", boundary = 0)+
+  coord_cartesian(expand = 0)+
+  scale_x_continuous(breaks = seq(-85,90,10))+
+  scale_fill_viridis_d()+
+  labs(title = "tCO2 observations per decade within 10° latitude intervals")
+
+```
+
+```{r histogramm_talk}
+
+GLODAP %>% 
+  filter(!is.na(talk)) %>% 
+  ggplot(aes(latitude, fill=decade))+
+  geom_vline(xintercept = -30, col="red")+
+  geom_histogram(binwidth = 10, col="black", boundary = 0)+
+  coord_cartesian(expand = 0)+
+  scale_x_continuous(breaks = seq(-85,90,10))+
+  scale_fill_viridis_d()+
+  labs(title = "talk observations per decade within 10° latitude intervals")
+
+```
+
+
+```{r histogramm_tCO2_talk}
+
+GLODAP %>% 
+  filter(!is.na(talk) & is.na(tco2)) %>% 
+  ggplot(aes(latitude, fill=decade))+
+  geom_vline(xintercept = -30, col="red")+
+  geom_histogram(binwidth = 10, col="black", boundary = 0)+
+  coord_cartesian(expand = 0)+
+  scale_x_continuous(breaks = seq(-85,90,10))+
+  scale_fill_viridis_d()+
+  labs(title = "Combined tCO2 and talk observations per decade within 10° latitude intervals")
+
+```
+
+# Southern Ocean
+
+Southern Ocean is defined here as the area between:
+
+- higher latitude: `r SO_lat_high`
+- lower latitude:  `r SO_lat_low`
+
+```{r write_GLODAP_SO, eval=FALSE}
+
+GLODAP_SO <- GLODAP %>% 
+  filter(latitude < SO_lat_high, latitude > SO_lat_low)
+
+GLODAP_SO  %>%  write_csv(here::here("data/_summarized_data_files", "GLODAPv2.2019_Merged_Master_File_JM_SO.csv"))
+
 ```

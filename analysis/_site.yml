@@ -5,6 +5,8 @@ navbar:
   left:
   - text: Home
     href: index.html
+  - text: Data base
+    href: data_base.html
   right:
   - icon: fa-github
     text: Source code
