@@ -1,17 +1,14 @@
-name: "GLODAP_AT_Southern_Ocean"
+name: "Alkalinity in the Southern Ocean based on GLODAP data"
 output_dir: ../docs
 navbar:
   title: "GLODAP_AT_Southern_Ocean"
   left:
   - text: Home
     href: index.html
-  - text: About
-    href: about.html
-  - text: License
-    href: license.html
 output:
   workflowr::wflow_html:
     toc: yes
     toc_float: yes
-    theme: cosmo
+    theme: lumen
     highlight: textmate
+    code_folding: hide
