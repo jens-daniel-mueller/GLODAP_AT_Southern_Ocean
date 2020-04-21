@@ -1,10 +1,14 @@
-name: "Alkalinity in the Southern Ocean based on GLODAP data"
+name: Alkalinity in the Southern Ocean based on GLODAP data
 output_dir: ../docs
 navbar:
-  title: "SO -> AT"
+  title: SO -> AT
   left:
   - text: Home
     href: index.html
+  right:
+  - icon: fa-github
+    text: Source code
+    href: https://github.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean
 output:
   workflowr::wflow_html:
     toc: yes
