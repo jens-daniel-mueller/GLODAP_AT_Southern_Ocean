@@ -1,7 +1,7 @@
 name: "Alkalinity in the Southern Ocean based on GLODAP data"
 output_dir: ../docs
 navbar:
-  title: "GLODAP_AT_Southern_Ocean"
+  title: "SO -> AT"
   left:
   - text: Home
     href: index.html
