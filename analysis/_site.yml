@@ -9,6 +9,6 @@ output:
   workflowr::wflow_html:
     toc: yes
     toc_float: yes
-    theme: lumen
+    theme: flatly
     highlight: textmate
     code_folding: hide
