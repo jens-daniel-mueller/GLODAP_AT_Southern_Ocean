@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Jens Daniel Müller" />
 
 
-<title>Home</title>
+<title>Data base</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,6 +20,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
@@ -262,6 +266,75 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
 
 </head>
 
@@ -269,6 +342,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -327,7 +410,9 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Home</h1>
+<h1 class="title toc-ignore">Data base</h1>
+<h4 class="author">Jens Daniel Müller</h4>
+<h4 class="date">21 April, 2020</h4>
 
 </div>
 
@@ -355,7 +440,7 @@ $(document).ready(function () {
 <strong>Last updated:</strong> 2020-04-21
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong> <code>GLODAP_AT_Southern_Ocean/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -377,6 +462,66 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
 <div class="panel-body">
 <p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20200421code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20200421)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20200421code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20200421)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
 </div>
 </div>
 </div>
@@ -419,7 +564,7 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <div id="versions" class="tab-pane fade">
 
 <p>
-These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/index.Rmd</code>) and HTML (<code>docs/index.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/SO_AT.Rmd</code>) and HTML (<code>docs/SO_AT.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
 </p>
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
@@ -445,61 +590,10 @@ Message
 <tbody>
 <tr>
 <td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/5922f8bbf7ac51a5cc1da01e0d0330a27e71f1a2/docs/index.html" target="_blank">5922f8b</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2020-04-21
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/7c631e407cc648af469130853cea7ceee9ddbfee/docs/index.html" target="_blank">7c631e4</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2020-04-21
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/436f0ed74b2697d6d435a56f998356d661e904ee/docs/index.html" target="_blank">436f0ed</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2020-04-21
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
 Rmd
 </td>
 <td>
-<a href="https://github.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/blob/88019e079ce82408ce73cb0acc558c8755118443/analysis/index.Rmd" target="_blank">88019e0</a>
+<a href="https://github.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/blob/71c82dcaf626090467c49a8463fd0bf98520ce1a/analysis/SO_AT.Rmd" target="_blank">71c82dc</a>
 </td>
 <td>
 jens-daniel-mueller
@@ -508,109 +602,7 @@ jens-daniel-mueller
 2020-04-21
 </td>
 <td>
-changes home description
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/26d228a8375f4f87567de3e47473f60ac89157c8/docs/index.html" target="_blank">26d228a</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2020-04-21
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/05bf633bd3d83b659638ddf283b2e675c4f86190/docs/index.html" target="_blank">05bf633</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2020-04-21
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/bc833fa18399013672e831f3c495beba65ad81a1/docs/index.html" target="_blank">bc833fa</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2020-04-21
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/5b0932f1fd7e54a31f082a19678533b5c88fed82/docs/index.html" target="_blank">5b0932f</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2020-04-21
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/bdd69a4785d4552b5a68e13af2c803658e87d1f7/docs/index.html" target="_blank">bdd69a4</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2020-04-21
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/blob/17f10b55a91e1e39271b92865466bfa988362bb7/analysis/index.Rmd" target="_blank">17f10b5</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2020-04-21
-</td>
-<td>
-Start workflowr project.
+added SO Rmd file
 </td>
 </tr>
 </tbody>
@@ -620,11 +612,51 @@ Start workflowr project.
 </div>
 </div>
 </div>
-<p>On this website we present our ongoing ambition to assess the alkalinity variability in the Southern Ocean based on GLODAP data.</p>
-<p>Please navigate trough the navbar on top to take a look at the various chapters of this project. The links in the upper right corner bring you to the source code of this project and back to Jens’ main homepage.</p>
-<ol start="3" style="list-style-type: lower-alpha">
-<li>Dr. Jens Daniel Müller</li>
-</ol>
+<pre class="r"><code>library(tidyverse)
+library(lubridate)</code></pre>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 3.6.3 (2020-02-29)
+Platform: i386-w64-mingw32/i386 (32-bit)
+Running under: Windows 10 x64 (build 18363)
+
+Matrix products: default
+
+locale:
+[1] LC_COLLATE=English_Germany.1252  LC_CTYPE=English_Germany.1252   
+[3] LC_MONETARY=English_Germany.1252 LC_NUMERIC=C                    
+[5] LC_TIME=English_Germany.1252    
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] lubridate_1.7.4 forcats_0.5.0   stringr_1.4.0   dplyr_0.8.5    
+ [5] purrr_0.3.3     readr_1.3.1     tidyr_1.0.2     tibble_3.0.0   
+ [9] ggplot2_3.3.0   tidyverse_1.3.0 workflowr_1.6.1
+
+loaded via a namespace (and not attached):
+ [1] DBI_1.1.0        withr_2.1.2      git2r_0.26.1     promises_1.1.0  
+ [5] rvest_0.3.5      tidyselect_1.0.0 rprojroot_1.3-2  lattice_0.20-41 
+ [9] pkgconfig_2.0.3  reprex_0.3.0     xml2_1.3.0       compiler_3.6.3  
+[13] fs_1.4.0         readxl_1.3.1     Rcpp_1.0.4       cli_2.0.2       
+[17] cellranger_1.1.0 httr_1.4.1       tools_3.6.3      nlme_3.1-145    
+[21] broom_0.5.5      rmarkdown_2.1    R6_2.4.1         dbplyr_1.4.2    
+[25] knitr_1.28       scales_1.1.0     assertthat_0.2.1 digest_0.6.25   
+[29] evaluate_0.14    gtable_0.3.0     rstudioapi_0.11  stringi_1.4.6   
+[33] fansi_0.4.1      whisker_0.4      hms_0.5.3        backports_1.1.5 
+[37] htmltools_0.4.0  munsell_0.5.0    grid_3.6.3       lifecycle_0.2.0 
+[41] colorspace_1.4-1 glue_1.3.2       httpuv_1.5.2     rlang_0.4.5     
+[45] magrittr_1.5     ellipsis_0.3.0   generics_0.0.2   vctrs_0.2.4     
+[49] yaml_2.2.1       crayon_1.3.4     haven_2.2.0      xfun_0.12       
+[53] modelr_0.1.6     later_1.0.0      pillar_1.4.3     jsonlite_1.6.1  </code></pre>
+</div>
 
 
 <!-- Adjust MathJax settings so that all math formulae are shown using
@@ -640,6 +672,8 @@ footer is added to webpages before the MathJax javascript. -->
 </script>
 
 
+</div>
+</div>
 
 </div>
 
@@ -677,6 +711,32 @@ $(document).ready(function () {
 });
 </script>
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
