@@ -369,9 +369,6 @@ div.tocify {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">Home</a>
-</li>
-<li>
   <a href="data_base.html">Data base</a>
 </li>
 <li>
@@ -528,16 +525,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuellerGLODAPATSouthernOceantree71c82dcaf626090467c49a8463fd0bf98520ce1atargetblank71c82dca"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/tree/71c82dcaf626090467c49a8463fd0bf98520ce1a" target="_blank">71c82dc</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuellerGLODAPATSouthernOceantreeb62bbbd7aea38f3d2d9c130bbda1b67caea1e454targetblankb62bbbda"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/tree/b62bbbd7aea38f3d2d9c130bbda1b67caea1e454" target="_blank">b62bbbd</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuellerGLODAPATSouthernOceantree71c82dcaf626090467c49a8463fd0bf98520ce1atargetblank71c82dca" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuellerGLODAPATSouthernOceantreeb62bbbd7aea38f3d2d9c130bbda1b67caea1e454targetblankb62bbbda" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/tree/71c82dcaf626090467c49a8463fd0bf98520ce1a" target="_blank">71c82dc</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/tree/b62bbbd7aea38f3d2d9c130bbda1b67caea1e454" target="_blank">b62bbbd</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -593,6 +590,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/blob/b62bbbd7aea38f3d2d9c130bbda1b67caea1e454/analysis/SO_AT.Rmd" target="_blank">b62bbbd</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2020-04-21
+</td>
+<td>
+SO map and distribution plots for tCO2 and talk
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/372c51842e874e7f00dae1200e594e7400f0705a/docs/SO_AT.html" target="_blank">372c518</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2020-04-21
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/blob/71c82dcaf626090467c49a8463fd0bf98520ce1a/analysis/SO_AT.Rmd" target="_blank">71c82dc</a>
 </td>
 <td>
@@ -614,6 +645,121 @@ added SO Rmd file
 </div>
 <pre class="r"><code>library(tidyverse)
 library(lubridate)</code></pre>
+<div id="subsetting-criteria" class="section level1">
+<h1><span class="header-section-number">1</span> Subsetting criteria</h1>
+<pre class="r"><code>year_start  &lt;- 2004
+year_end    &lt;- 2017
+depth_lower_limit &lt;- 500</code></pre>
+</div>
+<div id="read-summarized-so-data-file" class="section level1">
+<h1><span class="header-section-number">2</span> Read summarized SO data file</h1>
+<pre class="r"><code>GLODAP_SO &lt;- read_csv(here::here(&quot;data/_summarized_data_files&quot;, &quot;GLODAPv2.2019_Merged_Master_File_JM_SO.csv&quot;),
+                   guess_max = 1e5)
+
+# GLODAP_SO &lt;- GLODAP_SO %&gt;% 
+#   mutate(decade = as.factor(decade))
+
+GLODAP_SO &lt;- GLODAP_SO %&gt;% 
+  filter(!is.na(depth)) %&gt;% 
+  filter(year &gt;= year_start, year &lt;= year_end,
+         depth &lt;= depth_lower_limit)</code></pre>
+</div>
+<div id="vertical-gridding" class="section level1">
+<h1><span class="header-section-number">3</span> Vertical gridding</h1>
+<pre class="r"><code>GLODAP_SO &lt;- GLODAP_SO %&gt;% 
+  mutate(depth_grid = cut(depth, seq(0,5000, 50), include.lowest = TRUE))
+
+GLODAP_SO_depth_grid &lt;- GLODAP_SO %&gt;% 
+  select(date, year, month, latitude, longitude, tco2, talk, depth, depth_grid) %&gt;% 
+  group_by(depth_grid, year, month) %&gt;% 
+  summarise_all(lst(mean, sd, min, max), na.rm=TRUE) %&gt;% 
+  ungroup()</code></pre>
+</div>
+<div id="distribution-of-observations" class="section level1">
+<h1><span class="header-section-number">4</span> Distribution of observations</h1>
+<div id="longitudinal-distribution" class="section level2">
+<h2><span class="header-section-number">4.1</span> Longitudinal distribution</h2>
+<pre class="r"><code>GLODAP_SO_depth_grid %&gt;% 
+  ggplot(aes(longitude_mean))+
+  geom_histogram(binwidth = 20)+
+  facet_grid(year~.)</code></pre>
+<p><img src="figure/SO_AT.Rmd/observations_longitudinal_distribution-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="surface-map" class="section level2">
+<h2><span class="header-section-number">4.2</span> Surface map</h2>
+<pre class="r"><code>map_southpole &lt;- borders(&quot;world&quot;, colour=&quot;gray60&quot;, fill=&quot;gray60&quot;, ylim = c(-90,-25)) # create a layer of borders
+
+GLODAP_SO %&gt;% 
+  filter(!is.na(tco2)) %&gt;% 
+  ggplot(aes(longitude,latitude))+
+  map_southpole+
+  geom_point()+
+  scale_fill_viridis_c(name = &quot;SST (°C)&quot;, option = &quot;plasma&quot;, na.value = &quot;black&quot;)+
+  coord_map(&quot;ortho&quot;, orientation = c(-90, 0, 0), ylim = c(-90,-25))+
+  geom_hline(yintercept = c(-30, -65))+
+  theme(axis.text = element_blank(),
+        axis.title = element_blank(),
+        axis.ticks = element_blank())+
+  facet_wrap(~year)</code></pre>
+<p><img src="figure/SO_AT.Rmd/observations_map-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="alkalinity" class="section level1">
+<h1><span class="header-section-number">5</span> Alkalinity</h1>
+<div id="time-series" class="section level2">
+<h2><span class="header-section-number">5.1</span> Time series</h2>
+<pre class="r"><code>GLODAP_SO %&gt;% 
+  ggplot(aes(date, talk, col=depth_grid))+
+  geom_point()+
+  facet_wrap(~depth_grid)</code></pre>
+<p><img src="figure/SO_AT.Rmd/talk_time_series-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="dissolved-inorganic-carbon" class="section level1">
+<h1><span class="header-section-number">6</span> Dissolved inorganic carbon</h1>
+<div id="time-series-1" class="section level2">
+<h2><span class="header-section-number">6.1</span> Time series</h2>
+<pre class="r"><code>GLODAP_SO %&gt;% 
+  ggplot(aes(date, tco2, col=depth_grid))+
+  geom_point()+
+  facet_wrap(~depth_grid)</code></pre>
+<p><img src="figure/SO_AT.Rmd/tCO2_time_series-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>GLODAP_SO %&gt;% 
+  ggplot(aes(date, tco2/talk, col=depth_grid))+
+  geom_point()+
+  facet_wrap(~depth_grid)</code></pre>
+<p><img src="figure/SO_AT.Rmd/tCO2_talk_ratio_time_series-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="time-series-depth-grid" class="section level2">
+<h2><span class="header-section-number">6.2</span> Time series depth grid</h2>
+<pre class="r"><code>GLODAP_SO_depth_grid %&gt;% 
+  ggplot(aes(date_mean, tco2_mean, col=depth_grid))+
+  geom_path()+
+  geom_point()+
+  facet_wrap(~depth_grid)</code></pre>
+<p><img src="figure/SO_AT.Rmd/tCO2_depth_grid_time_series-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="seasonality" class="section level2">
+<h2><span class="header-section-number">6.3</span> Seasonality</h2>
+<pre class="r"><code>GLODAP_SO_depth_grid %&gt;% 
+  ggplot(aes(month, tco2_mean, col=depth_grid))+
+  geom_point()+
+  scale_x_continuous(breaks = seq(1,12,2))+
+  facet_wrap(~depth_grid)</code></pre>
+<p><img src="figure/SO_AT.Rmd/tCO2_depth_grid_seasonality-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>GLODAP_SO_depth_grid %&gt;% 
+  ggplot(aes(month, tco2_mean/talk_mean, col=depth_grid))+
+  geom_point()+
+  scale_x_continuous(breaks = seq(1,12,2))+
+  facet_wrap(~depth_grid)</code></pre>
+<p><img src="figure/SO_AT.Rmd/tCO2_talk_ratio_depth_grid_seasonality-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="open-tasks-questions" class="section level1">
+<h1><span class="header-section-number">7</span> Open tasks / questions</h1>
+<ul>
+<li>found several rows with depth NA. What is that? So far excluded from analysis</li>
+</ul>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -642,20 +788,23 @@ other attached packages:
  [9] ggplot2_3.3.0   tidyverse_1.3.0 workflowr_1.6.1
 
 loaded via a namespace (and not attached):
- [1] DBI_1.1.0        withr_2.1.2      git2r_0.26.1     promises_1.1.0  
- [5] rvest_0.3.5      tidyselect_1.0.0 rprojroot_1.3-2  lattice_0.20-41 
- [9] pkgconfig_2.0.3  reprex_0.3.0     xml2_1.3.0       compiler_3.6.3  
-[13] fs_1.4.0         readxl_1.3.1     Rcpp_1.0.4       cli_2.0.2       
-[17] cellranger_1.1.0 httr_1.4.1       tools_3.6.3      nlme_3.1-145    
-[21] broom_0.5.5      rmarkdown_2.1    R6_2.4.1         dbplyr_1.4.2    
-[25] knitr_1.28       scales_1.1.0     assertthat_0.2.1 digest_0.6.25   
-[29] evaluate_0.14    gtable_0.3.0     rstudioapi_0.11  stringi_1.4.6   
-[33] fansi_0.4.1      whisker_0.4      hms_0.5.3        backports_1.1.5 
-[37] htmltools_0.4.0  munsell_0.5.0    grid_3.6.3       lifecycle_0.2.0 
-[41] colorspace_1.4-1 glue_1.3.2       httpuv_1.5.2     rlang_0.4.5     
-[45] magrittr_1.5     ellipsis_0.3.0   generics_0.0.2   vctrs_0.2.4     
-[49] yaml_2.2.1       crayon_1.3.4     haven_2.2.0      xfun_0.12       
-[53] modelr_0.1.6     later_1.0.0      pillar_1.4.3     jsonlite_1.6.1  </code></pre>
+ [1] jsonlite_1.6.1    rstudioapi_0.11   generics_0.0.2    magrittr_1.5     
+ [5] farver_2.0.3      gtable_0.3.0      rmarkdown_2.1     vctrs_0.2.4      
+ [9] fs_1.4.0          hms_0.5.3         xml2_1.3.0        pillar_1.4.3     
+[13] htmltools_0.4.0   haven_2.2.0       later_1.0.0       broom_0.5.5      
+[17] cellranger_1.1.0  lattice_0.20-41   tidyselect_1.0.0  knitr_1.28       
+[21] git2r_0.26.1      whisker_0.4       lifecycle_0.2.0   pkgconfig_2.0.3  
+[25] R6_2.4.1          digest_0.6.25     xfun_0.12         colorspace_1.4-1 
+[29] rprojroot_1.3-2   stringi_1.4.6     yaml_2.2.1        evaluate_0.14    
+[33] labeling_0.3      fansi_0.4.1       httr_1.4.1        compiler_3.6.3   
+[37] here_0.1          cli_2.0.2         withr_2.1.2       backports_1.1.5  
+[41] munsell_0.5.0     DBI_1.1.0         modelr_0.1.6      Rcpp_1.0.4       
+[45] readxl_1.3.1      mapproj_1.2.7     maps_3.3.0        dbplyr_1.4.2     
+[49] ellipsis_0.3.0    assertthat_0.2.1  tools_3.6.3       reprex_0.3.0     
+[53] viridisLite_0.3.0 httpuv_1.5.2      scales_1.1.0      crayon_1.3.4     
+[57] glue_1.3.2        rlang_0.4.5       nlme_3.1-145      rvest_0.3.5      
+[61] promises_1.1.0    grid_3.6.3       </code></pre>
+</div>
 </div>
 
 
