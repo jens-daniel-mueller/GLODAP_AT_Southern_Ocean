@@ -73,16 +73,18 @@ GLODAP_SO <- GLODAP %>%
 GLODAP_SO <- GLODAP_SO %>% 
   filter(year >= year_start, year <= year_end)
 
-
-GLODAP_SO <- GLODAP_SO %>% 
+GLODAP_SO_tco2 <- GLODAP_SO %>% 
   filter(tco2f == f,
          tco2qc == qc,
          !is.na(tco2))
 
-GLODAP_SO <- GLODAP_SO %>% 
+GLODAP_SO_talk <- GLODAP_SO %>% 
   filter(talkf == f,
          talkqc == qc,
          !is.na(talk))
+
+GLODAP_SO <- full_join(GLODAP_SO_tco2, GLODAP_SO_talk)
+rm(GLODAP_SO_talk, GLODAP_SO_tco2)
 
 GLODAP_SO <- GLODAP_SO %>% 
   filter(depth <= depth_lower_limit)
@@ -230,7 +232,7 @@ GLODAP_SO %>%
 
 Observed variables for selected depth levels, colored by coarse latitute and longitude grids.
 
-```{r tCO2_time_series_lon_grid}
+```{r tCO2_time_series_lon_grid, fig.asp=1.5}
 
 GLODAP_SO %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
@@ -238,11 +240,12 @@ GLODAP_SO %>%
   geom_vline(xintercept = ymd("2009-01-01"))+
   geom_point()+
   facet_grid(depth_grid~var)+
-  theme(axis.title.x = element_blank())
+  theme(axis.title.x = element_blank())+
+  theme(legend.position = "bottom")
 
 ```
 
-```{r tCO2_time_series_lat_grid}
+```{r tCO2_time_series_lat_grid, fig.asp=1}
 
 GLODAP_SO %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
@@ -251,7 +254,8 @@ GLODAP_SO %>%
   geom_point()+
   scale_color_viridis_d()+
   facet_grid(depth_grid~var)+
-  theme(axis.title.x = element_blank())
+  theme(axis.title.x = element_blank())+
+  theme(legend.position = "bottom")
 
 ```
 
@@ -279,7 +283,8 @@ GLODAP_SO_mean_lat %>%
   geom_point()+
   scale_color_viridis_d()+
   facet_grid(depth_grid~var)+
-  theme(axis.title.x = element_blank())
+  theme(axis.title.x = element_blank())+
+  theme(legend.position = "bottom")
 
 ```
 
@@ -309,7 +314,8 @@ GLODAP_SO_nr_lat %>%
   geom_point()+
   scale_color_viridis_d()+
   facet_grid(depth_grid~var)+
-  theme(axis.title.x = element_blank())
+  theme(axis.title.x = element_blank())+
+  theme(legend.position = "bottom")
 
 ```
 
@@ -322,7 +328,8 @@ GLODAP_SO %>%
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
   ggplot(aes(latitude, value, col=longitude_grid_coarse))+
   geom_point()+
-  facet_grid(depth_grid~var)
+  facet_grid(depth_grid~var)+
+  theme(legend.position = "bottom")
 
 ```
 
@@ -333,7 +340,8 @@ GLODAP_SO %>%
   ggplot(aes(longitude, value, col=latitude_grid_coarse))+
   geom_point()+
   scale_color_viridis_d()+
-  facet_grid(depth_grid~var)
+  facet_grid(depth_grid~var)+
+  theme(legend.position = "bottom")
 
 ```
 
@@ -348,7 +356,8 @@ GLODAP_SO %>%
   ggplot(aes(temperature, value, col=latitude_grid_coarse))+
   geom_point()+
   scale_color_viridis_d()+
-  facet_grid(depth_grid~var)
+  facet_grid(depth_grid~var)+
+  theme(legend.position = "bottom")
 
 
 ```
@@ -362,7 +371,8 @@ GLODAP_SO %>%
   ggplot(aes(talk, tco2, col=latitude_grid_coarse))+
   geom_point()+
   scale_color_viridis_d()+
-  facet_wrap(~depth_grid)
+  facet_wrap(~depth_grid)+
+  theme(legend.position = "bottom")
 
 ```
 
