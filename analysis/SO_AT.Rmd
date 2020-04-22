@@ -253,18 +253,38 @@ GLODAP_SO_mean_lat <- GLODAP_SO %>%
   summarise(tco2_mean = mean(tco2, na.rm=TRUE)) %>% 
   ungroup()
 
+GLODAP_SO_nr_lat <- GLODAP_SO %>% 
+  filter(!is.na(tco2)) %>% 
+  group_by(year, latitude_grid_coarse, depth_grid) %>% 
+  summarise(tco2_count = n()) %>% 
+  ungroup()
+
 ```
 
-```{r tCO2_time_series_lat_grid_mean, fig.asp=1}
+```{r tCO2_time_series_lat_grid_mean}
 
 GLODAP_SO_mean_lat %>% 
-  #filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
+  filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
   ggplot(aes(year, tco2_mean, col=latitude_grid_coarse))+
   geom_vline(xintercept = 2009)+
   geom_line()+
   geom_point()+
   scale_color_viridis_d()+
-  facet_wrap(~depth_grid, ncol = 1)+
+  facet_wrap(~depth_grid)+
+  theme(axis.title.x = element_blank())
+
+```
+
+```{r tCO2_time_series_lat_grid_nr}
+
+GLODAP_SO_nr_lat %>% 
+  filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
+  ggplot(aes(year, tco2_count, col=latitude_grid_coarse))+
+  geom_vline(xintercept = 2009)+
+  geom_line()+
+  geom_point()+
+  scale_color_viridis_d()+
+  facet_wrap(~depth_grid)+
   theme(axis.title.x = element_blank())
 
 ```
@@ -293,23 +313,29 @@ GLODAP_SO %>%
 
 ```
 
+## Correlations
 
-```{r tco2_correlations}
+```{r tco2_temp_correlation}
+
+GLODAP_SO %>% 
+  filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
+  ggplot(aes(temperature, tco2, col=latitude_grid_coarse))+
+  geom_point()+
+  scale_color_viridis_d()+
+  facet_wrap(~depth_grid)
+
+
+```
+
+
+```{r tco2_talk_correlation}
 
 GLODAP_SO %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
   ggplot(aes(talk, tco2, col=latitude_grid_coarse))+
   geom_point()+
-  scale_color_viridis_d(option = "magma")+
-  facet_grid(.~depth_grid)
-
-GLODAP_SO %>% 
-  filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
-  ggplot(aes(latitude, tco2/talk, col=temperature))+
-  geom_point()+
-  scale_color_viridis_c(option = "magma")+
-  facet_grid(.~depth_grid)
-
+  scale_color_viridis_d()+
+  facet_wrap(~depth_grid)
 
 ```
 
