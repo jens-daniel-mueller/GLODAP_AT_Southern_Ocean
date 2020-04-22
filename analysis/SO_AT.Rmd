@@ -1,5 +1,5 @@
 ---
-title: "Data base"
+title: "Southern Ocean CO2-system patterns and dynamics"
 author: "Jens Daniel Müller"
 date:  "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
@@ -67,12 +67,12 @@ GLODAP <- read_csv(here::here("data/_summarized_data_files", "GLODAPv2.2019_Merg
 
 # GLODAP_SO <- GLODAP_SO %>% 
 #   mutate(decade = as.factor(decade))
-
 GLODAP_SO <- GLODAP %>% 
   filter(latitude <= SO_lat_high, latitude >= SO_lat_low)
 
 GLODAP_SO <- GLODAP_SO %>% 
   filter(year >= year_start, year <= year_end)
+
 
 GLODAP_SO <- GLODAP_SO %>% 
   filter(tco2f == f,
@@ -87,8 +87,10 @@ GLODAP_SO <- GLODAP_SO %>%
 GLODAP_SO <- GLODAP_SO %>% 
   filter(depth <= depth_lower_limit)
 
+
 GLODAP_SO <- GLODAP_SO %>% 
   select(date, cruise:bottomdepth, depth:salinity, tco2, talk)
+
 
 GLODAP_SO %>% write_csv(here::here("data/_summarized_data_files",
                                    "GLODAPv2.2019_Merged_Master_File_JM_SO.csv"))
@@ -101,9 +103,15 @@ rm(depth_lower_limit, f, qc, SO_lat_high, SO_lat_low, year_end, year_start)
 
 GLODAP_SO <- read_csv(here::here("data/_summarized_data_files", "GLODAPv2.2019_Merged_Master_File_JM_SO.csv"),
                    guess_max = 1e5)
+
+GLODAP_SO <- GLODAP_SO %>% 
+  pivot_longer(tco2:talk, names_to = "var", values_to = "value")
+
+
 ```
 
 # Gridding
+
 ## Vertical gridding
 
 ```{r depth_levels}
@@ -130,7 +138,7 @@ data were clustered into depth intervals between following depth levels:
 
 `r depth_intervals`
 
-This avoids creating "unobserved" values at the cost of vertical information.
+This avoids creating "unobserved" values at the cost of precise vertical information.
 
 ```{r vertical_gridding}
 
@@ -171,7 +179,9 @@ GLODAP_SO <- GLODAP_SO %>%
 
 ## Surface map
 
-```{r observations_map, fig.asp=1}
+All observations (tco2 and/or talk), were plotted with each sampling year being displayed as color or indivdual facet. Sampling depth was not taken into account.
+
+```{r observations_map}
 
 map_southpole <- borders("world", colour="gray60", fill="gray60", ylim = c(-90,-25)) # create a layer of borders
 
@@ -187,7 +197,9 @@ GLODAP_SO %>%
   theme(axis.text = element_blank(),
         axis.title = element_blank(),
         axis.ticks = element_blank(),
-        panel.grid = element_blank())
+        panel.grid = element_blank())+
+  facet_wrap(~var)+
+  theme(legend.position = "bottom")
   
 ```
 
@@ -210,8 +222,7 @@ GLODAP_SO %>%
   
 ```
 
-
-# Dissolved inorganic carbon (tco2)
+# tco2 and talk
 
 ## Time series
 
@@ -223,10 +234,10 @@ Observed variables for selected depth levels, colored by coarse latitute and lon
 
 GLODAP_SO %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
-  ggplot(aes(date, tco2, col=longitude_grid_coarse))+
+  ggplot(aes(date, value, col=longitude_grid_coarse))+
   geom_vline(xintercept = ymd("2009-01-01"))+
   geom_point()+
-  facet_wrap(~depth_grid)+
+  facet_grid(depth_grid~var)+
   theme(axis.title.x = element_blank())
 
 ```
@@ -235,100 +246,116 @@ GLODAP_SO %>%
 
 GLODAP_SO %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
-  ggplot(aes(date, tco2, col=latitude_grid_coarse))+
+  ggplot(aes(date, value, col=latitude_grid_coarse))+
   geom_vline(xintercept = ymd("2009-01-01"))+
   geom_point()+
   scale_color_viridis_d()+
-  facet_wrap(~depth_grid)+
+  facet_grid(depth_grid~var)+
   theme(axis.title.x = element_blank())
 
 ```
 
 ### Mean values
 
-```{r calculate_mean_tco2_lat}
+In order to minimize the effect of latitudinal sampling bias in the time series plots, the annual mean tco2 and the annual number of observation were calculted for 5 degree latitude intervals.
+
+```{r calculate_mean_value_lat_grid}
 
 GLODAP_SO_mean_lat <- GLODAP_SO %>% 
-  group_by(year, latitude_grid_coarse, depth_grid) %>% 
-  summarise(tco2_mean = mean(tco2, na.rm=TRUE)) %>% 
+  group_by(year, latitude_grid_coarse, depth_grid, var) %>% 
+  summarise(value_mean = mean(value, na.rm=TRUE)) %>% 
   ungroup()
 
-GLODAP_SO_nr_lat <- GLODAP_SO %>% 
-  filter(!is.na(tco2)) %>% 
-  group_by(year, latitude_grid_coarse, depth_grid) %>% 
-  summarise(tco2_count = n()) %>% 
-  ungroup()
 
 ```
 
-```{r tCO2_time_series_lat_grid_mean}
+```{r time_series_lat_grid_mean}
 
 GLODAP_SO_mean_lat %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
-  ggplot(aes(year, tco2_mean, col=latitude_grid_coarse))+
+  ggplot(aes(year, value_mean, col=latitude_grid_coarse))+
   geom_vline(xintercept = 2009)+
   geom_line()+
   geom_point()+
   scale_color_viridis_d()+
-  facet_wrap(~depth_grid)+
+  facet_grid(depth_grid~var)+
   theme(axis.title.x = element_blank())
 
 ```
 
-```{r tCO2_time_series_lat_grid_nr}
+### Number of observations
+
+In order to minimize the effect of latitudinal sampling bias in the time series plots, the annual mean tco2 and the annual number of observation were calculted for 5 degree latitude intervals.
+
+
+```{r count_observations_lat_grid}
+
+GLODAP_SO_nr_lat <- GLODAP_SO %>% 
+  filter(!is.na(value)) %>% 
+  group_by(year, latitude_grid_coarse, depth_grid, var) %>% 
+  summarise(count = n()) %>% 
+  ungroup()
+
+```
+
+
+```{r time_series_lat_grid_counts}
 
 GLODAP_SO_nr_lat %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
-  ggplot(aes(year, tco2_count, col=latitude_grid_coarse))+
+  ggplot(aes(year, count, col=latitude_grid_coarse))+
   geom_vline(xintercept = 2009)+
   geom_line()+
   geom_point()+
   scale_color_viridis_d()+
-  facet_wrap(~depth_grid)+
+  facet_grid(depth_grid~var)+
   theme(axis.title.x = element_blank())
 
 ```
 
 
-## Spatial distribution
+## Spatial patterns
 
-```{r tco2_latitudinal_distribution}
+```{r latitudinal_patterns}
 
 GLODAP_SO %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
-  ggplot(aes(latitude, tco2, col=longitude_grid_coarse))+
+  ggplot(aes(latitude, value, col=longitude_grid_coarse))+
   geom_point()+
-  facet_wrap(~depth_grid)
+  facet_grid(depth_grid~var)
 
 ```
 
-```{r tco2_longitudinal_distribution}
+```{r longitudinal_patterns}
 
 GLODAP_SO %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
-  ggplot(aes(longitude, tco2, col=latitude_grid_coarse))+
+  ggplot(aes(longitude, value, col=latitude_grid_coarse))+
   geom_point()+
   scale_color_viridis_d()+
-  facet_wrap(~depth_grid)
+  facet_grid(depth_grid~var)
 
 ```
 
 ## Correlations
 
+### tco2/talk vs temperature
+
 ```{r tco2_temp_correlation}
 
 GLODAP_SO %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
-  ggplot(aes(temperature, tco2, col=latitude_grid_coarse))+
+  ggplot(aes(temperature, value, col=latitude_grid_coarse))+
   geom_point()+
   scale_color_viridis_d()+
-  facet_wrap(~depth_grid)
+  facet_grid(depth_grid~var)
 
 
 ```
 
+### tco2 vs talk
 
-```{r tco2_talk_correlation}
+```{r tco2_talk_correlation, eval=FALSE}
 
 GLODAP_SO %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
@@ -342,10 +369,10 @@ GLODAP_SO %>%
 
 # Open tasks / questions
 
-- found several rows with depth NA. What is that? So far excluded from analysis
 - Check duplicated analysis at identical sampling location and time
+- Check correct subsetting by flag: Do we only have paired tco2/talk observations?
 
-Checks with Lydia
+# Checks with Lydia
 
 - number of tco2 observations in SO
 

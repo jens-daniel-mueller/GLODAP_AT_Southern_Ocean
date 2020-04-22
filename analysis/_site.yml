@@ -5,7 +5,7 @@ navbar:
   left:
   - text: Data base
     href: data_base.html
-  - text: Southern Ocean AT
+  - text: Southern Ocean DIC/AT
     href: SO_AT.html
   right:
   - icon: fa-github
