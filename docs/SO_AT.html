@@ -409,7 +409,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Data base</h1>
 <h4 class="author">Jens Daniel Müller</h4>
-<h4 class="date">21 April, 2020</h4>
+<h4 class="date">22 April, 2020</h4>
 
 </div>
 
@@ -434,7 +434,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-04-21
+<strong>Last updated:</strong> 2020-04-22
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -525,16 +525,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuellerGLODAPATSouthernOceantreeb62bbbd7aea38f3d2d9c130bbda1b67caea1e454targetblankb62bbbda"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/tree/b62bbbd7aea38f3d2d9c130bbda1b67caea1e454" target="_blank">b62bbbd</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuellerGLODAPATSouthernOceantree2d5e51bc601291596f88254587b8547f15793f04targetblank2d5e51ba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/tree/2d5e51bc601291596f88254587b8547f15793f04" target="_blank">2d5e51b</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuellerGLODAPATSouthernOceantreeb62bbbd7aea38f3d2d9c130bbda1b67caea1e454targetblankb62bbbda" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuellerGLODAPATSouthernOceantree2d5e51bc601291596f88254587b8547f15793f04targetblank2d5e51ba" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/tree/b62bbbd7aea38f3d2d9c130bbda1b67caea1e454" target="_blank">b62bbbd</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/tree/2d5e51bc601291596f88254587b8547f15793f04" target="_blank">2d5e51b</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -585,6 +585,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/blob/2d5e51bc601291596f88254587b8547f15793f04/analysis/SO_AT.Rmd" target="_blank">2d5e51b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2020-04-22
+</td>
+<td>
+worldmap and all subsetting in SO_AT
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/b7184e91b25be2a3bb9193e719797027191cd7f7/docs/SO_AT.html" target="_blank">b7184e9</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2020-04-21
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -647,25 +681,68 @@ added SO Rmd file
 library(lubridate)</code></pre>
 <div id="subsetting-criteria" class="section level1">
 <h1><span class="header-section-number">1</span> Subsetting criteria</h1>
-<pre class="r"><code>year_start  &lt;- 2004
+<pre class="r"><code>SO_lat_high &lt;- -30
+SO_lat_low &lt;- -65
+
+year_start  &lt;- 2004
 year_end    &lt;- 2017
-depth_lower_limit &lt;- 500</code></pre>
+depth_lower_limit &lt;- 500
+
+# 33 depth levels: [2.5, 5, 10:10:50, 75:25:150, 200:50:500, 600:100:1900,1975] 
+
+SO_lat_high</code></pre>
+<pre><code>[1] -30</code></pre>
+<pre class="r"><code>SO_lat_low</code></pre>
+<pre><code>[1] -65</code></pre>
+<pre class="r"><code>year_start</code></pre>
+<pre><code>[1] 2004</code></pre>
+<pre class="r"><code>year_end</code></pre>
+<pre><code>[1] 2017</code></pre>
+<pre class="r"><code>depth_lower_limit</code></pre>
+<pre><code>[1] 500</code></pre>
 </div>
-<div id="read-summarized-so-data-file" class="section level1">
-<h1><span class="header-section-number">2</span> Read summarized SO data file</h1>
-<pre class="r"><code>GLODAP_SO &lt;- read_csv(here::here(&quot;data/_summarized_data_files&quot;, &quot;GLODAPv2.2019_Merged_Master_File_JM_SO.csv&quot;),
+<div id="southern-ocean" class="section level1">
+<h1><span class="header-section-number">2</span> Southern Ocean</h1>
+<p>Southern Ocean is defined here as the area between:</p>
+<ul>
+<li>higher latitude: -30</li>
+<li>lower latitude: -65</li>
+</ul>
+</div>
+<div id="read-summarized-data-file" class="section level1">
+<h1><span class="header-section-number">3</span> Read summarized data file</h1>
+<pre class="r"><code>GLODAP &lt;- read_csv(here::here(&quot;data/_summarized_data_files&quot;, &quot;GLODAPv2.2019_Merged_Master_File_JM.csv&quot;),
                    guess_max = 1e5)
 
 # GLODAP_SO &lt;- GLODAP_SO %&gt;% 
 #   mutate(decade = as.factor(decade))
 
+GLODAP_SO &lt;- GLODAP %&gt;% 
+  filter(latitude &lt;= SO_lat_high, latitude &gt;= SO_lat_low)
+
 GLODAP_SO &lt;- GLODAP_SO %&gt;% 
-  filter(!is.na(depth)) %&gt;% 
-  filter(year &gt;= year_start, year &lt;= year_end,
-         depth &lt;= depth_lower_limit)</code></pre>
+  filter(year &gt;= year_start, year &lt;= year_end)
+
+GLODAP_SO &lt;- GLODAP_SO %&gt;% 
+  filter(tco2f == 2,
+         tco2qc == 1,
+         !is.na(tco2))
+
+GLODAP_SO &lt;- GLODAP_SO %&gt;% 
+  filter(talkf == 2,
+         talkqc == 1,
+         !is.na(talk))
+
+GLODAP_SO &lt;- GLODAP_SO %&gt;% 
+  filter(depth &lt;= depth_lower_limit)
+
+GLODAP_SO %&gt;% write_csv(here::here(&quot;data/_summarized_data_files&quot;,
+                                   &quot;GLODAPv2.2019_Merged_Master_File_JM_SO.csv&quot;))</code></pre>
+<pre class="r"><code>GLODAP_SO &lt;- read_csv(here::here(&quot;data/_summarized_data_files&quot;, &quot;GLODAPv2.2019_Merged_Master_File_JM_SO.csv&quot;),
+                   guess_max = 1e5)</code></pre>
 </div>
 <div id="vertical-gridding" class="section level1">
-<h1><span class="header-section-number">3</span> Vertical gridding</h1>
+<h1><span class="header-section-number">4</span> Vertical gridding</h1>
 <pre class="r"><code>GLODAP_SO &lt;- GLODAP_SO %&gt;% 
   mutate(depth_grid = cut(depth, seq(0,5000, 50), include.lowest = TRUE))
 
@@ -676,9 +753,9 @@ GLODAP_SO_depth_grid &lt;- GLODAP_SO %&gt;%
   ungroup()</code></pre>
 </div>
 <div id="distribution-of-observations" class="section level1">
-<h1><span class="header-section-number">4</span> Distribution of observations</h1>
+<h1><span class="header-section-number">5</span> Distribution of observations</h1>
 <div id="longitudinal-distribution" class="section level2">
-<h2><span class="header-section-number">4.1</span> Longitudinal distribution</h2>
+<h2><span class="header-section-number">5.1</span> Longitudinal distribution</h2>
 <pre class="r"><code>GLODAP_SO_depth_grid %&gt;% 
   ggplot(aes(longitude_mean))+
   geom_histogram(binwidth = 20)+
@@ -686,7 +763,7 @@ GLODAP_SO_depth_grid &lt;- GLODAP_SO %&gt;%
 <p><img src="figure/SO_AT.Rmd/observations_longitudinal_distribution-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="surface-map" class="section level2">
-<h2><span class="header-section-number">4.2</span> Surface map</h2>
+<h2><span class="header-section-number">5.2</span> Surface map</h2>
 <pre class="r"><code>map_southpole &lt;- borders(&quot;world&quot;, colour=&quot;gray60&quot;, fill=&quot;gray60&quot;, ylim = c(-90,-25)) # create a layer of borders
 
 GLODAP_SO %&gt;% 
@@ -705,9 +782,9 @@ GLODAP_SO %&gt;%
 </div>
 </div>
 <div id="alkalinity" class="section level1">
-<h1><span class="header-section-number">5</span> Alkalinity</h1>
+<h1><span class="header-section-number">6</span> Alkalinity</h1>
 <div id="time-series" class="section level2">
-<h2><span class="header-section-number">5.1</span> Time series</h2>
+<h2><span class="header-section-number">6.1</span> Time series</h2>
 <pre class="r"><code>GLODAP_SO %&gt;% 
   ggplot(aes(date, talk, col=depth_grid))+
   geom_point()+
@@ -716,9 +793,9 @@ GLODAP_SO %&gt;%
 </div>
 </div>
 <div id="dissolved-inorganic-carbon" class="section level1">
-<h1><span class="header-section-number">6</span> Dissolved inorganic carbon</h1>
+<h1><span class="header-section-number">7</span> Dissolved inorganic carbon</h1>
 <div id="time-series-1" class="section level2">
-<h2><span class="header-section-number">6.1</span> Time series</h2>
+<h2><span class="header-section-number">7.1</span> Time series</h2>
 <pre class="r"><code>GLODAP_SO %&gt;% 
   ggplot(aes(date, tco2, col=depth_grid))+
   geom_point()+
@@ -731,7 +808,7 @@ GLODAP_SO %&gt;%
 <p><img src="figure/SO_AT.Rmd/tCO2_talk_ratio_time_series-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="time-series-depth-grid" class="section level2">
-<h2><span class="header-section-number">6.2</span> Time series depth grid</h2>
+<h2><span class="header-section-number">7.2</span> Time series depth grid</h2>
 <pre class="r"><code>GLODAP_SO_depth_grid %&gt;% 
   ggplot(aes(date_mean, tco2_mean, col=depth_grid))+
   geom_path()+
@@ -740,7 +817,7 @@ GLODAP_SO %&gt;%
 <p><img src="figure/SO_AT.Rmd/tCO2_depth_grid_time_series-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="seasonality" class="section level2">
-<h2><span class="header-section-number">6.3</span> Seasonality</h2>
+<h2><span class="header-section-number">7.3</span> Seasonality</h2>
 <pre class="r"><code>GLODAP_SO_depth_grid %&gt;% 
   ggplot(aes(month, tco2_mean, col=depth_grid))+
   geom_point()+
@@ -756,7 +833,7 @@ GLODAP_SO %&gt;%
 </div>
 </div>
 <div id="open-tasks-questions" class="section level1">
-<h1><span class="header-section-number">7</span> Open tasks / questions</h1>
+<h1><span class="header-section-number">8</span> Open tasks / questions</h1>
 <ul>
 <li>found several rows with depth NA. What is that? So far excluded from analysis</li>
 </ul>
