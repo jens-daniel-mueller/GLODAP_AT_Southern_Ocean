@@ -171,7 +171,7 @@ GLODAP_SO <- GLODAP_SO %>%
 
 ## Surface map
 
-```{r observations_map}
+```{r observations_map, fig.asp=1}
 
 map_southpole <- borders("world", colour="gray60", fill="gray60", ylim = c(-90,-25)) # create a layer of borders
 
@@ -191,7 +191,7 @@ GLODAP_SO %>%
   
 ```
 
-```{r observations_map_year_grid}
+```{r observations_map_year_grid, fig.asp=1.5}
 
 GLODAP_SO %>% 
   ggplot(aes(longitude, latitude))+
@@ -245,6 +245,30 @@ GLODAP_SO %>%
 ```
 
 ### Mean values
+
+```{r calculate_mean_tco2_lat}
+
+GLODAP_SO_mean_lat <- GLODAP_SO %>% 
+  group_by(year, latitude_grid_coarse, depth_grid) %>% 
+  summarise(tco2_mean = mean(tco2, na.rm=TRUE)) %>% 
+  ungroup()
+
+```
+
+```{r tCO2_time_series_lat_grid_mean, fig.asp=1}
+
+GLODAP_SO_mean_lat %>% 
+  #filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
+  ggplot(aes(year, tco2_mean, col=latitude_grid_coarse))+
+  geom_vline(xintercept = 2009)+
+  geom_line()+
+  geom_point()+
+  scale_color_viridis_d()+
+  facet_wrap(~depth_grid, ncol = 1)+
+  theme(axis.title.x = element_blank())
+
+```
+
 
 ## Spatial distribution
 
