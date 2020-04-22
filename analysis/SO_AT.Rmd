@@ -30,29 +30,72 @@ theme_set(theme_bw())
 
 ```{r criteria}
 
+SO_lat_high <- -30
+SO_lat_low <- -65
+
 year_start  <- 2004
 year_end    <- 2017
 depth_lower_limit <- 500
 
+# 33 depth levels: [2.5, 5, 10:10:50, 75:25:150, 200:50:500, 600:100:1900,1975] 
+
+SO_lat_high
+SO_lat_low
+
+year_start
+year_end
+depth_lower_limit
+
 ```
 
 
-# Read summarized SO data file
+# Southern Ocean
 
-```{r reopen_GLODAP}
+Southern Ocean is defined here as the area between:
 
-GLODAP_SO <- read_csv(here::here("data/_summarized_data_files", "GLODAPv2.2019_Merged_Master_File_JM_SO.csv"),
+- higher latitude: `r SO_lat_high`
+- lower latitude:  `r SO_lat_low`
+
+# Read summarized data file
+
+```{r subset_GLODAP, eval=FALSE}
+
+GLODAP <- read_csv(here::here("data/_summarized_data_files", "GLODAPv2.2019_Merged_Master_File_JM.csv"),
                    guess_max = 1e5)
 
 # GLODAP_SO <- GLODAP_SO %>% 
 #   mutate(decade = as.factor(decade))
 
+GLODAP_SO <- GLODAP %>% 
+  filter(latitude <= SO_lat_high, latitude >= SO_lat_low)
+
 GLODAP_SO <- GLODAP_SO %>% 
-  filter(!is.na(depth)) %>% 
-  filter(year >= year_start, year <= year_end,
-         depth <= depth_lower_limit)
+  filter(year >= year_start, year <= year_end)
+
+GLODAP_SO <- GLODAP_SO %>% 
+  filter(tco2f == 2,
+         tco2qc == 1,
+         !is.na(tco2))
+
+GLODAP_SO <- GLODAP_SO %>% 
+  filter(talkf == 2,
+         talkqc == 1,
+         !is.na(talk))
+
+GLODAP_SO <- GLODAP_SO %>% 
+  filter(depth <= depth_lower_limit)
+
+GLODAP_SO %>% write_csv(here::here("data/_summarized_data_files",
+                                   "GLODAPv2.2019_Merged_Master_File_JM_SO.csv"))
 
 ```
+
+```{r reopen_GLODAP}
+
+GLODAP_SO <- read_csv(here::here("data/_summarized_data_files", "GLODAPv2.2019_Merged_Master_File_JM_SO.csv"),
+                   guess_max = 1e5)
+```
+
 
 # Vertical gridding
 
