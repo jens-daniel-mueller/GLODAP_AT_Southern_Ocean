@@ -48,13 +48,22 @@ depth_lower_limit
 
 ```
 
-
-# Southern Ocean
-
 Southern Ocean is defined here as the area between:
 
 - higher latitude: `r SO_lat_high`
 - lower latitude:  `r SO_lat_low`
+
+Time is restricted to years from:
+
+- `r year_start` to `r year_end`.
+
+Only observations with:
+
+- maximum depth of `r depth_lower_limit`
+- quality flag f: 2
+- quality flag qc: 1
+
+were investigated.
 
 # Read summarized data file
 
