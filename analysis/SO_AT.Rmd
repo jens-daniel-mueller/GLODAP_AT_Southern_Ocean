@@ -232,7 +232,7 @@ GLODAP_SO %>%
 
 Observed variables for selected depth levels, colored by coarse latitute and longitude grids.
 
-```{r tCO2_time_series_lon_grid, fig.asp=1.5}
+```{r tCO2_time_series_lon_grid, fig.asp=1}
 
 GLODAP_SO %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
@@ -273,7 +273,7 @@ GLODAP_SO_mean_lat <- GLODAP_SO %>%
 
 ```
 
-```{r time_series_lat_grid_mean}
+```{r time_series_lat_grid_mean, fig.asp=1}
 
 GLODAP_SO_mean_lat %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
@@ -304,7 +304,7 @@ GLODAP_SO_nr_lat <- GLODAP_SO %>%
 ```
 
 
-```{r time_series_lat_grid_counts}
+```{r time_series_lat_grid_counts, fig.asp=1}
 
 GLODAP_SO_nr_lat %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
@@ -322,7 +322,7 @@ GLODAP_SO_nr_lat %>%
 
 ## Spatial patterns
 
-```{r latitudinal_patterns}
+```{r latitudinal_patterns, fig.asp=1}
 
 GLODAP_SO %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
@@ -333,7 +333,7 @@ GLODAP_SO %>%
 
 ```
 
-```{r longitudinal_patterns}
+```{r longitudinal_patterns, fig.asp=1}
 
 GLODAP_SO %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
@@ -349,7 +349,7 @@ GLODAP_SO %>%
 
 ### tco2/talk vs temperature
 
-```{r tco2_temp_correlation}
+```{r tco2_temp_correlation, fig.asp=1}
 
 GLODAP_SO %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
@@ -364,7 +364,7 @@ GLODAP_SO %>%
 
 ### tco2 vs talk
 
-```{r tco2_talk_correlation, eval=FALSE}
+```{r tco2_talk_correlation, fig.asp=1, eval=FALSE}
 
 GLODAP_SO %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
