@@ -106,7 +106,7 @@ rm(depth_lower_limit, f, qc, SO_lat_high, SO_lat_low, year_end, year_start)
 GLODAP_SO <- read_csv(here::here("data/_summarized_data_files", "GLODAPv2.2019_Merged_Master_File_JM_SO.csv"),
                    guess_max = 1e5)
 
-GLODAP_SO <- GLODAP_SO %>% 
+GLODAP_SO_long <- GLODAP_SO %>% 
   pivot_longer(tco2:talk, names_to = "var", values_to = "value")
 
 
@@ -114,7 +114,7 @@ GLODAP_SO <- GLODAP_SO %>%
 
 # Gridding
 
-## Vertical gridding
+## Vertical
 
 ```{r depth_levels}
 
@@ -144,13 +144,19 @@ However, the intervals were labeled with the exact same numbers as used by Lydia
 
 ```{r vertical_gridding}
 
+GLODAP_SO_long <- GLODAP_SO_long %>% 
+  mutate(depth_grid = as.numeric(as.character(cut(depth,
+                          breaks = depth_intervals,
+                          labels = depth_levels,
+                          include.lowest = TRUE))))
+
 GLODAP_SO <- GLODAP_SO %>% 
   mutate(depth_grid = as.numeric(as.character(cut(depth,
                           breaks = depth_intervals,
                           labels = depth_levels,
                           include.lowest = TRUE))))
 
-# GLODAP_SO_depth_grid <- GLODAP_SO %>% 
+# GLODAP_SO_long_depth_grid <- GLODAP_SO_long %>% 
 #   select(date, year, month, latitude, longitude, tco2, talk, depth, depth_grid) %>% 
 #   group_by(depth_grid, year, month) %>% 
 #   summarise_all(lst(mean, sd, min, max), na.rm=TRUE) %>% 
@@ -166,7 +172,7 @@ For exploratory analysis, data were also clustered into coarse 20°-longitude an
 
 ```{r horizontal_gridding}
 
-GLODAP_SO <- GLODAP_SO %>% 
+GLODAP_SO_long <- GLODAP_SO_long %>% 
   mutate(latitude_grid = as.numeric(as.character(cut(latitude,
                                                      breaks =  seq(-90, 90, 1),
                                                      labels = seq(-89.5,89.5,1)))),
@@ -178,6 +184,8 @@ GLODAP_SO <- GLODAP_SO %>%
 
 ```
 
+
+# Spatial distribution
 
 ## Surface map
 
@@ -193,7 +201,7 @@ It appears that:
 
 map_southpole <- borders("world", colour="gray60", fill="gray60", ylim = c(-90,-25)) # create a layer of borders
 
-GLODAP_SO %>% 
+GLODAP_SO_long %>% 
   ggplot(aes(longitude, latitude, col=as.factor(year)))+
   map_southpole+
   geom_hline(yintercept = seq(-65, -30, 5))+
@@ -214,7 +222,7 @@ GLODAP_SO %>%
 
 ```{r observations_map_year_grid, fig.asp=1.5}
 
-GLODAP_SO %>% 
+GLODAP_SO_long %>% 
   ggplot(aes(longitude, latitude))+
   map_southpole+
   geom_hline(yintercept = seq(-65, -30, 5))+
@@ -231,17 +239,23 @@ GLODAP_SO %>%
   
 ```
 
-# tco2 and talk
+# Time series
 
-## Time series
+## Observed values
 
-### Observed values
+Observed `tco2` and `talk` for selected depth levels were plotted, colored by coarse latitute and longitude grids.
 
-Observed variables for selected depth levels, colored by coarse latitute and longitude grids.
+First impressions are:
+
+- `tco2` is lower than `talk` and more variable (as expected)
+- `tco2` increases with latitude
+- latitudinal patterns less pronounced for `talk`
+- longitudinal patterns less pronounced for both parameters
+- dip around 2009 might be biased by sampling pattern
 
 ```{r tCO2_time_series_lon_grid, fig.asp=1}
 
-GLODAP_SO %>% 
+GLODAP_SO_long %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
   ggplot(aes(date, value, col=longitude_grid_coarse))+
   geom_vline(xintercept = ymd("2009-01-01"))+
@@ -254,7 +268,7 @@ GLODAP_SO %>%
 
 ```{r tCO2_time_series_lat_grid, fig.asp=1}
 
-GLODAP_SO %>% 
+GLODAP_SO_long %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
   ggplot(aes(date, value, col=latitude_grid_coarse))+
   geom_vline(xintercept = ymd("2009-01-01"))+
@@ -266,23 +280,30 @@ GLODAP_SO %>%
 
 ```
 
-### Mean values
+## Mean values
 
-In order to minimize the effect of latitudinal sampling bias in the time series plots, the annual mean tco2 and the annual number of observation were calculted for 5 degree latitude intervals.
+In order to minimize the effect of latitudinal sampling bias in the time series plots, the annual mean `tco2` and `talk` were calculted for 5°-latitude intervals.
+
+First impressions:
+
+- 2009 `tco2` dip only detectable in 500m and intermediate latitudes
+- similar dip seems to be detectable in `talk`, questioning the MOC hypothesis
 
 ```{r calculate_mean_value_lat_grid}
 
-GLODAP_SO_mean_lat <- GLODAP_SO %>% 
+GLODAP_SO_long_mean_lat <- GLODAP_SO_long %>% 
   group_by(year, latitude_grid_coarse, depth_grid, var) %>% 
   summarise(value_mean = mean(value, na.rm=TRUE)) %>% 
-  ungroup()
+  ungroup() %>% 
+  arrange(depth_grid, var, year) %>% 
+  filter(!is.na(value_mean))
 
 
 ```
 
 ```{r time_series_lat_grid_mean, fig.asp=1}
 
-GLODAP_SO_mean_lat %>% 
+GLODAP_SO_long_mean_lat %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
   ggplot(aes(year, value_mean, col=latitude_grid_coarse))+
   geom_vline(xintercept = 2009)+
@@ -295,14 +316,16 @@ GLODAP_SO_mean_lat %>%
 
 ```
 
-### Number of observations
+## Number of observations
 
-In order to minimize the effect of latitudinal sampling bias in the time series plots, the annual mean tco2 and the annual number of observation were calculted for 5 degree latitude intervals.
+The annual number of observation were calculted for 5 degree latitude intervals.
+
+- Outstanding high number of observations in 2009 at 30-35°S
 
 
 ```{r count_observations_lat_grid}
 
-GLODAP_SO_nr_lat <- GLODAP_SO %>% 
+GLODAP_SO_long_nr_lat <- GLODAP_SO_long %>% 
   filter(!is.na(value)) %>% 
   group_by(year, latitude_grid_coarse, depth_grid, var) %>% 
   summarise(count = n()) %>% 
@@ -313,7 +336,7 @@ GLODAP_SO_nr_lat <- GLODAP_SO %>%
 
 ```{r time_series_lat_grid_counts, fig.asp=1}
 
-GLODAP_SO_nr_lat %>% 
+GLODAP_SO_long_nr_lat %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
   ggplot(aes(year, count, col=latitude_grid_coarse))+
   geom_vline(xintercept = 2009)+
@@ -327,11 +350,13 @@ GLODAP_SO_nr_lat %>%
 ```
 
 
-## Spatial patterns
+# Spatial patterns
+
+In order to order to gain a more precise idea about the spatial distribution of `tco2` and `talk`, both parameters were plotted against latitude and colored by longitude, and vice versa.
 
 ```{r latitudinal_patterns, fig.asp=1}
 
-GLODAP_SO %>% 
+GLODAP_SO_long %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
   ggplot(aes(latitude, value, col=longitude_grid_coarse))+
   geom_point()+
@@ -342,7 +367,7 @@ GLODAP_SO %>%
 
 ```{r longitudinal_patterns, fig.asp=1}
 
-GLODAP_SO %>% 
+GLODAP_SO_long %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
   ggplot(aes(longitude, value, col=latitude_grid_coarse))+
   geom_point()+
@@ -352,13 +377,18 @@ GLODAP_SO %>%
 
 ```
 
-## Correlations
+# Correlations
 
-### tco2/talk vs temperature
+## tco2/talk vs temperature
 
-```{r tco2_temp_correlation, fig.asp=1}
+`tco2` and `talk` were plotted against temperature.
 
-GLODAP_SO %>% 
+First impression:
+- DIC depends more strongly on temperature, likely due to the higher solubilty of cold waters
+
+```{r tco2_talk_vs_temp_correlation, fig.asp=1}
+
+GLODAP_SO_long %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
   ggplot(aes(temperature, value, col=latitude_grid_coarse))+
   geom_point()+
@@ -369,17 +399,16 @@ GLODAP_SO %>%
 
 ```
 
-### tco2 vs talk
+## tco2 vs talk
 
-```{r tco2_talk_correlation, fig.asp=1, eval=FALSE}
+```{r tco2_vs_talk_correlation, fig.asp=1, eval=FALSE}
 
 GLODAP_SO %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
-  ggplot(aes(talk, tco2, col=latitude_grid_coarse))+
+  ggplot(aes(talk, tco2, col=latitude))+
   geom_point()+
-  scale_color_viridis_d()+
-  facet_wrap(~depth_grid)+
-  theme(legend.position = "bottom")
+  scale_color_viridis_c()+
+  facet_wrap(~depth_grid)
 
 ```
 
