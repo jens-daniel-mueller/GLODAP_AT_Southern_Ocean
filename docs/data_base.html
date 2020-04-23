@@ -409,7 +409,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Data base</h1>
 <h4 class="author">Jens Daniel Müller</h4>
-<h4 class="date">22 April, 2020</h4>
+<h4 class="date">23 April, 2020</h4>
 
 </div>
 
@@ -434,7 +434,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-04-22
+<strong>Last updated:</strong> 2020-04-23
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -525,16 +525,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuellerGLODAPATSouthernOceantreed2148012358dd20dff89519b669aa23e4887aed1targetblankd214801a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/tree/d2148012358dd20dff89519b669aa23e4887aed1" target="_blank">d214801</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuellerGLODAPATSouthernOceantreee7ae53d3191bb07125bd314236e5a661edf9e662targetblanke7ae53da"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/tree/e7ae53d3191bb07125bd314236e5a661edf9e662" target="_blank">e7ae53d</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuellerGLODAPATSouthernOceantreed2148012358dd20dff89519b669aa23e4887aed1targetblankd214801a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuellerGLODAPATSouthernOceantreee7ae53d3191bb07125bd314236e5a661edf9e662targetblanke7ae53da" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/tree/d2148012358dd20dff89519b669aa23e4887aed1" target="_blank">d214801</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/tree/e7ae53d3191bb07125bd314236e5a661edf9e662" target="_blank">e7ae53d</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -544,9 +544,6 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    data/_summarized_data_files/
-
-Untracked files:
-    Untracked:  code/Workflowr_project_managment.R
 
 </code></pre>
 <p>
@@ -585,6 +582,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/blob/e7ae53d3191bb07125bd314236e5a661edf9e662/analysis/data_base.Rmd" target="_blank">e7ae53d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2020-04-23
+</td>
+<td>
+corrected histogram plot, added explanation and structure
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/baa4e0b24ea27f1feac1f666c92fee1684f291a1/docs/data_base.html" target="_blank">baa4e0b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2020-04-22
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -800,7 +831,7 @@ set up data base
 library(lubridate)</code></pre>
 <div id="reading-original-data" class="section level1">
 <h1><span class="header-section-number">1</span> Reading original data</h1>
-<p>The file <code>GLODAPv2.2019_Merged_Master_File.csv</code> from glodap.info was used.</p>
+<p>The file <code>GLODAPv2.2019_Merged_Master_File.csv</code> from <a href="https://www.glodap.info/">glodap.info</a> was used.</p>
 <p>Only rows which have at least one <code>talk</code> or <code>tco2</code> observation were subsetted.</p>
 <pre class="r"><code>GLODAP &lt;- read_csv(here::here(&quot;data&quot;, &quot;GLODAPv2.2019_Merged_Master_File.csv&quot;),
                    na = &quot;-9999&quot;,
@@ -823,7 +854,7 @@ GLODAP  %&gt;%  write_csv(here::here(&quot;data/_summarized_data_files&quot;, &q
 </div>
 <div id="overview-glodapv2-2019" class="section level1">
 <h1><span class="header-section-number">2</span> Overview GLODAPv2-2019</h1>
-<p>Saptio temporal distribution of tCO2 and talk data.</p>
+<p>Saptio-temporal distribution of <code>talk</code> and <code>tco2</code> data.</p>
 <pre class="r"><code>GLODAP &lt;- read_csv(here::here(&quot;data/_summarized_data_files&quot;,
                               &quot;GLODAPv2.2019_Merged_Master_File_JM.csv&quot;),
                    guess_max = 1e5)
@@ -840,7 +871,7 @@ GLODAP &lt;- GLODAP %&gt;%
   coord_cartesian(expand = 0)+
   scale_x_continuous(breaks = seq(-85,90,10))+
   scale_fill_viridis_d()+
-  labs(title = &quot;tCO2 observations&quot;)</code></pre>
+  labs(title = &quot;tco2 observations&quot;)</code></pre>
 <p><img src="figure/data_base.Rmd/histogramm_tco2-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>GLODAP %&gt;% 
   filter(!is.na(talk)) %&gt;% 
@@ -853,14 +884,14 @@ GLODAP &lt;- GLODAP %&gt;%
   labs(title = &quot;talk observations&quot;)</code></pre>
 <p><img src="figure/data_base.Rmd/histogramm_talk-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>GLODAP %&gt;% 
-  filter(!is.na(talk) &amp; is.na(tco2)) %&gt;% 
+  filter(!is.na(talk) &amp; !is.na(tco2)) %&gt;% 
   ggplot(aes(latitude, fill=decade))+
   geom_vline(xintercept = -30, col=&quot;red&quot;)+
   geom_histogram(binwidth = 10, col=&quot;black&quot;, boundary = 0)+
   coord_cartesian(expand = 0)+
   scale_x_continuous(breaks = seq(-85,90,10))+
   scale_fill_viridis_d()+
-  labs(title = &quot;Paired tCO2 + talk observations&quot;)</code></pre>
+  labs(title = &quot;Paired tco2 + talk observations&quot;)</code></pre>
 <p><img src="figure/data_base.Rmd/histogramm_tCO2_talk-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="world-map" class="section level2">

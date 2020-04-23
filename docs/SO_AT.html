@@ -525,16 +525,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuellerGLODAPATSouthernOceantree29cf67ef1f114e6324adf7b241d05c1e4f6bb27ftargetblank29cf67ea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/tree/29cf67ef1f114e6324adf7b241d05c1e4f6bb27f" target="_blank">29cf67e</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuellerGLODAPATSouthernOceantreee7ae53d3191bb07125bd314236e5a661edf9e662targetblanke7ae53da"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/tree/e7ae53d3191bb07125bd314236e5a661edf9e662" target="_blank">e7ae53d</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuellerGLODAPATSouthernOceantree29cf67ef1f114e6324adf7b241d05c1e4f6bb27ftargetblank29cf67ea" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuellerGLODAPATSouthernOceantreee7ae53d3191bb07125bd314236e5a661edf9e662targetblanke7ae53da" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/tree/29cf67ef1f114e6324adf7b241d05c1e4f6bb27f" target="_blank">29cf67e</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/tree/e7ae53d3191bb07125bd314236e5a661edf9e662" target="_blank">e7ae53d</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -582,6 +582,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/blob/e7ae53d3191bb07125bd314236e5a661edf9e662/analysis/SO_AT.Rmd" target="_blank">e7ae53d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2020-04-23
+</td>
+<td>
+corrected histogram plot, added explanation and structure
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/6db86dda0d33fefc34977b3c70ec703cf966631a/docs/SO_AT.html" target="_blank">6db86dd</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2020-04-23
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1032,13 +1066,13 @@ GLODAP_SO %&gt;% write_csv(here::here(&quot;data/_summarized_data_files&quot;,
 GLODAP_SO &lt;- read_csv(here::here(&quot;data/_summarized_data_files&quot;, &quot;GLODAPv2.2019_Merged_Master_File_JM_SO.csv&quot;),
                    guess_max = 1e5)
 
-GLODAP_SO &lt;- GLODAP_SO %&gt;% 
+GLODAP_SO_long &lt;- GLODAP_SO %&gt;% 
   pivot_longer(tco2:talk, names_to = &quot;var&quot;, values_to = &quot;value&quot;)</code></pre>
 </div>
 <div id="gridding" class="section level1">
 <h1><span class="header-section-number">2</span> Gridding</h1>
-<div id="vertical-gridding" class="section level2">
-<h2><span class="header-section-number">2.1</span> Vertical gridding</h2>
+<div id="vertical" class="section level2">
+<h2><span class="header-section-number">2.1</span> Vertical</h2>
 <pre class="r"><code>depth_levels &lt;-
   c(2.5, 
     5, 
@@ -1055,13 +1089,19 @@ depth_intervals &lt;-
 <p>data were clustered into depth intervals between following depth limits:</p>
 <p>0, 3.75, 7.5, 15, 25, 35, 45, 62.5, 87.5, 112.5, 137.5, 175, 225, 275, 325, 375, 425, 475, 550, 650, 750, 850, 950, 1050, 1150, 1250, 1350, 1450, 1550, 1650, 1750, 1850, 1937.5, 2000</p>
 <p>However, the intervals were labeled with the exact same numbers as used by Lydia. This grouping in comparison to linear interpolation avoids creating “unobserved” values at the cost of less precise vertical information.</p>
-<pre class="r"><code>GLODAP_SO &lt;- GLODAP_SO %&gt;% 
+<pre class="r"><code>GLODAP_SO_long &lt;- GLODAP_SO_long %&gt;% 
   mutate(depth_grid = as.numeric(as.character(cut(depth,
                           breaks = depth_intervals,
                           labels = depth_levels,
                           include.lowest = TRUE))))
 
-# GLODAP_SO_depth_grid &lt;- GLODAP_SO %&gt;% 
+GLODAP_SO &lt;- GLODAP_SO %&gt;% 
+  mutate(depth_grid = as.numeric(as.character(cut(depth,
+                          breaks = depth_intervals,
+                          labels = depth_levels,
+                          include.lowest = TRUE))))
+
+# GLODAP_SO_long_depth_grid &lt;- GLODAP_SO_long %&gt;% 
 #   select(date, year, month, latitude, longitude, tco2, talk, depth, depth_grid) %&gt;% 
 #   group_by(depth_grid, year, month) %&gt;% 
 #   summarise_all(lst(mean, sd, min, max), na.rm=TRUE) %&gt;% 
@@ -1071,7 +1111,7 @@ depth_intervals &lt;-
 <h2><span class="header-section-number">2.2</span> Horizontal</h2>
 <p>Observations were gridded to a 1° x 1° degree latitude and longitude grid.</p>
 <p>For exploratory analysis, data were also clustered into coarse 20°-longitude and 5°-latitude grids.</p>
-<pre class="r"><code>GLODAP_SO &lt;- GLODAP_SO %&gt;% 
+<pre class="r"><code>GLODAP_SO_long &lt;- GLODAP_SO_long %&gt;% 
   mutate(latitude_grid = as.numeric(as.character(cut(latitude,
                                                      breaks =  seq(-90, 90, 1),
                                                      labels = seq(-89.5,89.5,1)))),
@@ -1081,8 +1121,11 @@ depth_intervals &lt;-
          latitude_grid_coarse = cut(latitude, seq(-90,90,5)),
          longitude_grid_coarse = cut(longitude, seq(-180, 180, 40)))</code></pre>
 </div>
+</div>
+<div id="spatial-distribution" class="section level1">
+<h1><span class="header-section-number">3</span> Spatial distribution</h1>
 <div id="surface-map" class="section level2">
-<h2><span class="header-section-number">2.3</span> Surface map</h2>
+<h2><span class="header-section-number">3.1</span> Surface map</h2>
 <p>All observations (<code>tco2</code> and/or <code>talk</code>), were plotted with each sampling year being displayed as color or indivdual facet. Sampling depth was not taken into account at his stage, but it is assumed that mainly completed profiles were submitted to GLODAP.</p>
 <p>It appears that:</p>
 <ul>
@@ -1092,7 +1135,7 @@ depth_intervals &lt;-
 </ul>
 <pre class="r"><code>map_southpole &lt;- borders(&quot;world&quot;, colour=&quot;gray60&quot;, fill=&quot;gray60&quot;, ylim = c(-90,-25)) # create a layer of borders
 
-GLODAP_SO %&gt;% 
+GLODAP_SO_long %&gt;% 
   ggplot(aes(longitude, latitude, col=as.factor(year)))+
   map_southpole+
   geom_hline(yintercept = seq(-65, -30, 5))+
@@ -1109,7 +1152,7 @@ GLODAP_SO %&gt;%
   facet_wrap(~var)+
   theme(legend.position = &quot;bottom&quot;)</code></pre>
 <p><img src="figure/SO_AT.Rmd/observations_map-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>GLODAP_SO %&gt;% 
+<pre class="r"><code>GLODAP_SO_long %&gt;% 
   ggplot(aes(longitude, latitude))+
   map_southpole+
   geom_hline(yintercept = seq(-65, -30, 5))+
@@ -1126,14 +1169,20 @@ GLODAP_SO %&gt;%
 <p><img src="figure/SO_AT.Rmd/observations_map_year_grid-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 </div>
-<div id="tco2-and-talk" class="section level1">
-<h1><span class="header-section-number">3</span> tco2 and talk</h1>
-<div id="time-series" class="section level2">
-<h2><span class="header-section-number">3.1</span> Time series</h2>
-<div id="observed-values" class="section level3">
-<h3><span class="header-section-number">3.1.1</span> Observed values</h3>
-<p>Observed variables for selected depth levels, colored by coarse latitute and longitude grids.</p>
-<pre class="r"><code>GLODAP_SO %&gt;% 
+<div id="time-series" class="section level1">
+<h1><span class="header-section-number">4</span> Time series</h1>
+<div id="observed-values" class="section level2">
+<h2><span class="header-section-number">4.1</span> Observed values</h2>
+<p>Observed <code>tco2</code> and <code>talk</code> for selected depth levels were plotted, colored by coarse latitute and longitude grids.</p>
+<p>First impressions are:</p>
+<ul>
+<li><code>tco2</code> is lower than <code>talk</code> and more variable (as expected)</li>
+<li><code>tco2</code> increases with latitude</li>
+<li>latitudinal patterns less pronounced for <code>talk</code></li>
+<li>longitudinal patterns less pronounced for both parameters</li>
+<li>dip around 2009 might be biased by sampling pattern</li>
+</ul>
+<pre class="r"><code>GLODAP_SO_long %&gt;% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %&gt;% 
   ggplot(aes(date, value, col=longitude_grid_coarse))+
   geom_vline(xintercept = ymd(&quot;2009-01-01&quot;))+
@@ -1142,7 +1191,7 @@ GLODAP_SO %&gt;%
   theme(axis.title.x = element_blank())+
   theme(legend.position = &quot;bottom&quot;)</code></pre>
 <p><img src="figure/SO_AT.Rmd/tCO2_time_series_lon_grid-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>GLODAP_SO %&gt;% 
+<pre class="r"><code>GLODAP_SO_long %&gt;% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %&gt;% 
   ggplot(aes(date, value, col=latitude_grid_coarse))+
   geom_vline(xintercept = ymd(&quot;2009-01-01&quot;))+
@@ -1153,14 +1202,21 @@ GLODAP_SO %&gt;%
   theme(legend.position = &quot;bottom&quot;)</code></pre>
 <p><img src="figure/SO_AT.Rmd/tCO2_time_series_lat_grid-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
-<div id="mean-values" class="section level3">
-<h3><span class="header-section-number">3.1.2</span> Mean values</h3>
-<p>In order to minimize the effect of latitudinal sampling bias in the time series plots, the annual mean tco2 and the annual number of observation were calculted for 5 degree latitude intervals.</p>
-<pre class="r"><code>GLODAP_SO_mean_lat &lt;- GLODAP_SO %&gt;% 
+<div id="mean-values" class="section level2">
+<h2><span class="header-section-number">4.2</span> Mean values</h2>
+<p>In order to minimize the effect of latitudinal sampling bias in the time series plots, the annual mean <code>tco2</code> and <code>talk</code> were calculted for 5°-latitude intervals.</p>
+<p>First impressions:</p>
+<ul>
+<li>2009 <code>tco2</code> dip only detectable in 500m and intermediate latitudes</li>
+<li>similar dip seems to be detectable in <code>talk</code>, questioning the MOC hypothesis</li>
+</ul>
+<pre class="r"><code>GLODAP_SO_long_mean_lat &lt;- GLODAP_SO_long %&gt;% 
   group_by(year, latitude_grid_coarse, depth_grid, var) %&gt;% 
   summarise(value_mean = mean(value, na.rm=TRUE)) %&gt;% 
-  ungroup()</code></pre>
-<pre class="r"><code>GLODAP_SO_mean_lat %&gt;% 
+  ungroup() %&gt;% 
+  arrange(depth_grid, var, year) %&gt;% 
+  filter(!is.na(value_mean))</code></pre>
+<pre class="r"><code>GLODAP_SO_long_mean_lat %&gt;% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %&gt;% 
   ggplot(aes(year, value_mean, col=latitude_grid_coarse))+
   geom_vline(xintercept = 2009)+
@@ -1172,15 +1228,18 @@ GLODAP_SO %&gt;%
   theme(legend.position = &quot;bottom&quot;)</code></pre>
 <p><img src="figure/SO_AT.Rmd/time_series_lat_grid_mean-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
-<div id="number-of-observations" class="section level3">
-<h3><span class="header-section-number">3.1.3</span> Number of observations</h3>
-<p>In order to minimize the effect of latitudinal sampling bias in the time series plots, the annual mean tco2 and the annual number of observation were calculted for 5 degree latitude intervals.</p>
-<pre class="r"><code>GLODAP_SO_nr_lat &lt;- GLODAP_SO %&gt;% 
+<div id="number-of-observations" class="section level2">
+<h2><span class="header-section-number">4.3</span> Number of observations</h2>
+<p>The annual number of observation were calculted for 5 degree latitude intervals.</p>
+<ul>
+<li>Outstanding high number of observations in 2009 at 30-35°S</li>
+</ul>
+<pre class="r"><code>GLODAP_SO_long_nr_lat &lt;- GLODAP_SO_long %&gt;% 
   filter(!is.na(value)) %&gt;% 
   group_by(year, latitude_grid_coarse, depth_grid, var) %&gt;% 
   summarise(count = n()) %&gt;% 
   ungroup()</code></pre>
-<pre class="r"><code>GLODAP_SO_nr_lat %&gt;% 
+<pre class="r"><code>GLODAP_SO_long_nr_lat %&gt;% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %&gt;% 
   ggplot(aes(year, count, col=latitude_grid_coarse))+
   geom_vline(xintercept = 2009)+
@@ -1193,16 +1252,17 @@ GLODAP_SO %&gt;%
 <p><img src="figure/SO_AT.Rmd/time_series_lat_grid_counts-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 </div>
-<div id="spatial-patterns" class="section level2">
-<h2><span class="header-section-number">3.2</span> Spatial patterns</h2>
-<pre class="r"><code>GLODAP_SO %&gt;% 
+<div id="spatial-patterns" class="section level1">
+<h1><span class="header-section-number">5</span> Spatial patterns</h1>
+<p>In order to order to gain a more precise idea about the spatial distribution of <code>tco2</code> and <code>talk</code>, both parameters were plotted against latitude and colored by longitude, and vice versa.</p>
+<pre class="r"><code>GLODAP_SO_long %&gt;% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %&gt;% 
   ggplot(aes(latitude, value, col=longitude_grid_coarse))+
   geom_point()+
   facet_grid(depth_grid~var)+
   theme(legend.position = &quot;bottom&quot;)</code></pre>
 <p><img src="figure/SO_AT.Rmd/latitudinal_patterns-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>GLODAP_SO %&gt;% 
+<pre class="r"><code>GLODAP_SO_long %&gt;% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %&gt;% 
   ggplot(aes(longitude, value, col=latitude_grid_coarse))+
   geom_point()+
@@ -1211,40 +1271,40 @@ GLODAP_SO %&gt;%
   theme(legend.position = &quot;bottom&quot;)</code></pre>
 <p><img src="figure/SO_AT.Rmd/longitudinal_patterns-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
-<div id="correlations" class="section level2">
-<h2><span class="header-section-number">3.3</span> Correlations</h2>
-<div id="tco2talk-vs-temperature" class="section level3">
-<h3><span class="header-section-number">3.3.1</span> tco2/talk vs temperature</h3>
-<pre class="r"><code>GLODAP_SO %&gt;% 
+<div id="correlations" class="section level1">
+<h1><span class="header-section-number">6</span> Correlations</h1>
+<div id="tco2talk-vs-temperature" class="section level2">
+<h2><span class="header-section-number">6.1</span> tco2/talk vs temperature</h2>
+<p><code>tco2</code> and <code>talk</code> were plotted against temperature.</p>
+<p>First impression: - DIC depends more strongly on temperature, likely due to the higher solubilty of cold waters</p>
+<pre class="r"><code>GLODAP_SO_long %&gt;% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %&gt;% 
   ggplot(aes(temperature, value, col=latitude_grid_coarse))+
   geom_point()+
   scale_color_viridis_d()+
   facet_grid(depth_grid~var)+
   theme(legend.position = &quot;bottom&quot;)</code></pre>
-<p><img src="figure/SO_AT.Rmd/tco2_temp_correlation-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/SO_AT.Rmd/tco2_talk_vs_temp_correlation-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
-<div id="tco2-vs-talk" class="section level3">
-<h3><span class="header-section-number">3.3.2</span> tco2 vs talk</h3>
+<div id="tco2-vs-talk" class="section level2">
+<h2><span class="header-section-number">6.2</span> tco2 vs talk</h2>
 <pre class="r"><code>GLODAP_SO %&gt;% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %&gt;% 
-  ggplot(aes(talk, tco2, col=latitude_grid_coarse))+
+  ggplot(aes(talk, tco2, col=latitude))+
   geom_point()+
-  scale_color_viridis_d()+
-  facet_wrap(~depth_grid)+
-  theme(legend.position = &quot;bottom&quot;)</code></pre>
-</div>
+  scale_color_viridis_c()+
+  facet_wrap(~depth_grid)</code></pre>
 </div>
 </div>
 <div id="open-tasks-questions" class="section level1">
-<h1><span class="header-section-number">4</span> Open tasks / questions</h1>
+<h1><span class="header-section-number">7</span> Open tasks / questions</h1>
 <ul>
 <li>Check duplicated analysis at identical sampling location and time</li>
 <li>Check correct subsetting by flag: Do we only have paired tco2/talk observations?</li>
 </ul>
 </div>
 <div id="checks-with-lydia" class="section level1">
-<h1><span class="header-section-number">5</span> Checks with Lydia</h1>
+<h1><span class="header-section-number">8</span> Checks with Lydia</h1>
 <ul>
 <li>number of tco2 observations in SO</li>
 </ul>
