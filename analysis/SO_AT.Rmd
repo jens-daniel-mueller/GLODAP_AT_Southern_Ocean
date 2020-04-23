@@ -401,7 +401,7 @@ GLODAP_SO_long %>%
 
 ## tco2 vs talk
 
-```{r tco2_vs_talk_correlation, fig.asp=1, eval=FALSE}
+```{r tco2_vs_talk_correlation}
 
 GLODAP_SO %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
