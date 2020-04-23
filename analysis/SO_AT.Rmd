@@ -50,15 +50,15 @@ Southern Ocean is defined here as the area between:
 
 Time is restricted to years from:
 
-- `r year_start` to `r year_end`.
+- `r year_start` to `r year_end`
 
 Only observations with:
 
-- maximum depth of `r depth_lower_limit`
+- maximum depth: `r depth_lower_limit`
 - quality flag f: `r f`
 - quality flag qc: `r qc`
 
-were investigated. Quality flags were checked individually, only when `tco2` and `talk` observations are available.
+were investigated. Quality flags were checked individually for `tco2` and `talk`. The resulting data sets were merged, such that each accepted `tco2` and `talk` is kept and we have observations with only one of both parameters determined.
 
 ```{r subset_GLODAP, eval=FALSE}
 
@@ -136,11 +136,11 @@ As an adaptation of Lydia's interpolation to 33 depth levels:
 
 `r depth_levels`
 
-data were clustered into depth intervals between following depth levels:
+data were clustered into depth intervals between following depth limits:
 
 `r depth_intervals`
 
-This avoids creating "unobserved" values at the cost of precise vertical information.
+However, the intervals were labeled with the exact same numbers as used by Lydia. This grouping in comparison to linear interpolation avoids creating "unobserved" values at the cost of less precise vertical information.
 
 ```{r vertical_gridding}
 
@@ -160,9 +160,9 @@ GLODAP_SO <- GLODAP_SO %>%
 
 ## Horizontal
 
-Observations were gridded to a 1 x 1 degree latitude and longitude grid.
+Observations were gridded to a 1° x 1° degree latitude and longitude grid.
 
-For exploratory analysis, data were also clustered into coarse 20 degree longitude and 5 degree latitude grids.
+For exploratory analysis, data were also clustered into coarse 20°-longitude and 5°-latitude grids.
 
 ```{r horizontal_gridding}
 
@@ -181,7 +181,13 @@ GLODAP_SO <- GLODAP_SO %>%
 
 ## Surface map
 
-All observations (tco2 and/or talk), were plotted with each sampling year being displayed as color or indivdual facet. Sampling depth was not taken into account.
+All observations (`tco2` and/or `talk`), were plotted with each sampling year being displayed as color or indivdual facet. Sampling depth was not taken into account at his stage, but it is assumed that mainly completed profiles were submitted to GLODAP.
+
+It appears that:
+
+- homogenious distribution of observations in space and time is questionable, which can be critical for trend and variability analysis
+- Most sampling events are organized either meridional or zonal
+- in 2009/10 many observations exist in 30-35°S 
 
 ```{r observations_map}
 
@@ -195,7 +201,8 @@ GLODAP_SO %>%
   geom_point()+
   coord_map("ortho", orientation = c(-90, 0, 0),
             ylim = c(-85,-30), xlim = c(-180,180))+
-  scale_color_viridis_d(name="year")+
+  scale_color_scico_d(palette = "bamako", name="year")+
+  #scale_color_viridis_d(option = "magma", name="year")+
   theme(axis.text = element_blank(),
         axis.title = element_blank(),
         axis.ticks = element_blank(),
