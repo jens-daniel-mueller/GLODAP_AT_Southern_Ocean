@@ -390,9 +390,9 @@ First impression:
 
 GLODAP_SO_long %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
-  ggplot(aes(temperature, value, col=latitude_grid_coarse))+
+  ggplot(aes(temperature, value, col=latitude))+
   geom_point()+
-  scale_color_viridis_d()+
+  scale_color_viridis_c()+
   facet_grid(depth_grid~var)+
   theme(legend.position = "bottom")
 
