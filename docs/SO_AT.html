@@ -409,7 +409,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Southern Ocean CO2-system patterns and dynamics</h1>
 <h4 class="author">Jens Daniel Müller</h4>
-<h4 class="date">23 April, 2020</h4>
+<h4 class="date">24 April, 2020</h4>
 
 </div>
 
@@ -434,7 +434,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-04-23
+<strong>Last updated:</strong> 2020-04-24
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -525,16 +525,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuellerGLODAPATSouthernOceantree479c2f674337125e88ae489b85f254185bcf51e4targetblank479c2f6a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/tree/479c2f674337125e88ae489b85f254185bcf51e4" target="_blank">479c2f6</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuellerGLODAPATSouthernOceantreefbd8223553bd49a73b777ae91e3aebeff7508602targetblankfbd8223a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/tree/fbd8223553bd49a73b777ae91e3aebeff7508602" target="_blank">fbd8223</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuellerGLODAPATSouthernOceantree479c2f674337125e88ae489b85f254185bcf51e4targetblank479c2f6a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuellerGLODAPATSouthernOceantreefbd8223553bd49a73b777ae91e3aebeff7508602targetblankfbd8223a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/tree/479c2f674337125e88ae489b85f254185bcf51e4" target="_blank">479c2f6</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/tree/fbd8223553bd49a73b777ae91e3aebeff7508602" target="_blank">fbd8223</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -543,7 +543,6 @@ Note that you need to be careful to ensure that all relevant files for the analy
 Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
-    Ignored:    analysis/figure/
     Ignored:    data/_summarized_data_files/
 
 </code></pre>
@@ -583,6 +582,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/blob/fbd8223553bd49a73b777ae91e3aebeff7508602/analysis/SO_AT.Rmd" target="_blank">fbd8223</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2020-04-24
+</td>
+<td>
+Annual mean time series
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/c5f044c67928088ab92b87a09b6f21fc5d4c1336/docs/SO_AT.html" target="_blank">c5f044c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2020-04-23
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1273,6 +1306,8 @@ GLODAP_SO_long %&gt;%
 </div>
 <div id="mean-values" class="section level2">
 <h2><span class="header-section-number">4.2</span> Mean values</h2>
+<div id="zonal" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> Zonal</h3>
 <p>In order to minimize the effect of latitudinal sampling bias in the time series plots, the annual mean <code>tco2</code> and <code>talk</code> were calculted for 5°-latitude intervals.</p>
 <p>First impressions:</p>
 <ul>
@@ -1295,10 +1330,40 @@ GLODAP_SO_long %&gt;%
   facet_grid(depth_grid~var)+
   theme(axis.title.x = element_blank())+
   theme(legend.position = &quot;bottom&quot;)</code></pre>
-<p><img src="figure/SO_AT.Rmd/time_series_lat_grid_mean-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/SO_AT.Rmd/time_series_annual_mean_lat_grid-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="entire-so" class="section level3">
+<h3><span class="header-section-number">4.2.2</span> Entire SO</h3>
+<p>In order to proof the effect of latitudinal sampling bias in the time series plots, the annual mean <code>tco2</code> and <code>talk</code> were calculted for the entire SO.</p>
+<p>First impressions:</p>
+<ul>
+<li>2009 <code>tco2</code> dip only detectable in 500m and intermediate latitudes</li>
+<li>similar dip seems to be detectable in <code>talk</code>, questioning the MOC hypothesis</li>
+</ul>
+<pre class="r"><code>GLODAP_SO_long_mean &lt;- GLODAP_SO_long %&gt;% 
+  group_by(year, depth_grid, var) %&gt;% 
+  summarise(value_mean = mean(value, na.rm=TRUE)) %&gt;% 
+  ungroup() %&gt;% 
+  arrange(depth_grid, var, year) %&gt;% 
+  filter(!is.na(value_mean))</code></pre>
+<pre class="r"><code>GLODAP_SO_long_mean %&gt;% 
+  filter(depth_grid %in% c(10, 100, 300, 500)) %&gt;% 
+  ggplot(aes(year, value_mean))+
+  geom_vline(xintercept = 2009)+
+  geom_line(aes(col=as.factor(depth_grid)))+
+  geom_point(aes(fill=as.factor(depth_grid)),shape=21)+
+  scale_fill_scico_d(palette = &quot;batlow&quot;, name=&quot;Depth levels (m)&quot;, direction = -1)+
+  scale_color_scico_d(palette = &quot;batlow&quot;, name=&quot;Depth levels (m)&quot;, direction = -1)+
+  facet_wrap(~var)+
+  theme(axis.title.x = element_blank())+
+  theme(legend.position = &quot;bottom&quot;)</code></pre>
+<p><img src="figure/SO_AT.Rmd/time_series_annual_mean-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
 </div>
 <div id="number-of-observations" class="section level2">
 <h2><span class="header-section-number">4.3</span> Number of observations</h2>
+<div id="zonal-1" class="section level3">
+<h3><span class="header-section-number">4.3.1</span> Zonal</h3>
 <p>The annual number of observation were calculted for 5 degree latitude intervals.</p>
 <ul>
 <li>Outstanding high number of observations in 2009 at 30-35°S</li>
@@ -1319,6 +1384,7 @@ GLODAP_SO_long %&gt;%
   theme(axis.title.x = element_blank())+
   theme(legend.position = &quot;bottom&quot;)</code></pre>
 <p><img src="figure/SO_AT.Rmd/time_series_lat_grid_counts-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
 </div>
 </div>
 <div id="spatial-patterns" class="section level1">
