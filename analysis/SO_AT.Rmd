@@ -282,6 +282,8 @@ GLODAP_SO_long %>%
 
 ## Mean values
 
+### Zonal
+
 In order to minimize the effect of latitudinal sampling bias in the time series plots, the annual mean `tco2` and `talk` were calculted for 5°-latitude intervals.
 
 First impressions:
@@ -289,7 +291,7 @@ First impressions:
 - 2009 `tco2` dip only detectable in 500m and intermediate latitudes
 - similar dip seems to be detectable in `talk`, questioning the MOC hypothesis
 
-```{r calculate_mean_value_lat_grid}
+```{r calculate_annual_mean_value_lat_grid}
 
 GLODAP_SO_long_mean_lat <- GLODAP_SO_long %>% 
   group_by(year, latitude_grid_coarse, depth_grid, var) %>% 
@@ -301,7 +303,7 @@ GLODAP_SO_long_mean_lat <- GLODAP_SO_long %>%
 
 ```
 
-```{r time_series_lat_grid_mean, fig.asp=1}
+```{r time_series_annual_mean_lat_grid, fig.asp=1}
 
 GLODAP_SO_long_mean_lat %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
@@ -316,7 +318,46 @@ GLODAP_SO_long_mean_lat %>%
 
 ```
 
+### Entire SO
+
+In order to proof the effect of latitudinal sampling bias in the time series plots, the annual mean `tco2` and `talk` were calculted for the entire SO.
+
+First impressions:
+
+- 2009 `tco2` dip only detectable in 500m and intermediate latitudes
+- similar dip seems to be detectable in `talk`, questioning the MOC hypothesis
+
+```{r calculate_annual_mean_value}
+
+GLODAP_SO_long_mean <- GLODAP_SO_long %>% 
+  group_by(year, depth_grid, var) %>% 
+  summarise(value_mean = mean(value, na.rm=TRUE)) %>% 
+  ungroup() %>% 
+  arrange(depth_grid, var, year) %>% 
+  filter(!is.na(value_mean))
+
+
+```
+
+```{r time_series_annual_mean}
+
+GLODAP_SO_long_mean %>% 
+  filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
+  ggplot(aes(year, value_mean))+
+  geom_vline(xintercept = 2009)+
+  geom_line(aes(col=as.factor(depth_grid)))+
+  geom_point(aes(fill=as.factor(depth_grid)),shape=21)+
+  scale_fill_scico_d(palette = "batlow", name="Depth levels (m)", direction = -1)+
+  scale_color_scico_d(palette = "batlow", name="Depth levels (m)", direction = -1)+
+  facet_wrap(~var)+
+  theme(axis.title.x = element_blank())+
+  theme(legend.position = "bottom")
+
+```
+
 ## Number of observations
+
+### Zonal
 
 The annual number of observation were calculted for 5 degree latitude intervals.
 
