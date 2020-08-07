@@ -62,7 +62,8 @@ were investigated. Quality flags were checked individually for `tco2` and `talk`
 
 ```{r subset_GLODAP, eval=FALSE}
 
-GLODAP <- read_csv(here::here("data/_summarized_data_files", "GLODAPv2.2019_Merged_Master_File_JM.csv"),
+GLODAP <- read_csv(here::here("data/_summarized_data_files",
+                              "GLODAPv2.2020_Merged_Master_File_JM.csv"),
                    guess_max = 1e5)
 
 # GLODAP_SO <- GLODAP_SO %>% 
@@ -95,7 +96,7 @@ GLODAP_SO <- GLODAP_SO %>%
 
 
 GLODAP_SO %>% write_csv(here::here("data/_summarized_data_files",
-                                   "GLODAPv2.2019_Merged_Master_File_JM_SO.csv"))
+                                   "GLODAPv2.2020_Merged_Master_File_JM_SO.csv"))
 
 ```
 
@@ -103,7 +104,7 @@ GLODAP_SO %>% write_csv(here::here("data/_summarized_data_files",
 
 rm(depth_lower_limit, f, qc, SO_lat_high, SO_lat_low, year_end, year_start)
 
-GLODAP_SO <- read_csv(here::here("data/_summarized_data_files", "GLODAPv2.2019_Merged_Master_File_JM_SO.csv"),
+GLODAP_SO <- read_csv(here::here("data/_summarized_data_files", "GLODAPv2.2020_Merged_Master_File_JM_SO.csv"),
                    guess_max = 1e5)
 
 GLODAP_SO_long <- GLODAP_SO %>% 
@@ -202,20 +203,20 @@ It appears that:
 map_southpole <- borders("world", colour="gray60", fill="gray60", ylim = c(-90,-25)) # create a layer of borders
 
 GLODAP_SO_long %>% 
-  ggplot(aes(longitude, latitude, col=as.factor(year)))+
+  ggplot(aes(longitude, latitude, col=as.factor(year))) +
   map_southpole+
-  geom_hline(yintercept = seq(-65, -30, 5))+
-  geom_vline(xintercept = seq(-180, 180, 40))+
-  geom_point()+
+  geom_hline(yintercept = seq(-65, -30, 5)) +
+  geom_vline(xintercept = seq(-180, 180, 40)) +
+  geom_point() +
   coord_map("ortho", orientation = c(-90, 0, 0),
-            ylim = c(-85,-30), xlim = c(-180,180))+
-  scale_color_scico_d(palette = "bamako", name="year")+
-  #scale_color_viridis_d(option = "magma", name="year")+
+            ylim = c(-85,-30), xlim = c(-180,180)) +
+  scale_color_scico_d(palette = "bamako", name="year") +
+  #scale_color_viridis_d(option = "magma", name="year") +
   theme(axis.text = element_blank(),
         axis.title = element_blank(),
         axis.ticks = element_blank(),
-        panel.grid = element_blank())+
-  facet_wrap(~var)+
+        panel.grid = element_blank()) +
+  facet_wrap(~var) +
   theme(legend.position = "bottom")
   
 ```
@@ -223,18 +224,18 @@ GLODAP_SO_long %>%
 ```{r observations_map_year_grid, fig.asp=1.5}
 
 GLODAP_SO_long %>% 
-  ggplot(aes(longitude, latitude))+
+  ggplot(aes(longitude, latitude)) +
   map_southpole+
-  geom_hline(yintercept = seq(-65, -30, 5))+
-  geom_vline(xintercept = seq(-180, 180, 40))+
-  geom_point()+
+  geom_hline(yintercept = seq(-65, -30, 5)) +
+  geom_vline(xintercept = seq(-180, 180, 40)) +
+  geom_point() +
   coord_map("ortho", orientation = c(-90, 0, 0),
-            ylim = c(-85,-30), xlim = c(-180,180))+
-  scale_color_viridis_d(name="year")+
+            ylim = c(-85,-30), xlim = c(-180,180)) +
+  scale_color_viridis_d(name="year") +
   theme(axis.text = element_blank(),
         axis.title = element_blank(),
         axis.ticks = element_blank(),
-        panel.grid = element_blank())+
+        panel.grid = element_blank()) +
   facet_wrap(~year, ncol = 3)
   
 ```
@@ -257,11 +258,11 @@ First impressions are:
 
 GLODAP_SO_long %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
-  ggplot(aes(date, value, col=longitude_grid_coarse))+
-  geom_vline(xintercept = ymd("2009-01-01"))+
-  geom_point()+
-  facet_grid(depth_grid~var)+
-  theme(axis.title.x = element_blank())+
+  ggplot(aes(date, value, col=longitude_grid_coarse)) +
+  geom_vline(xintercept = ymd("2009-01-01")) +
+  geom_point() +
+  facet_grid(depth_grid~var) +
+  theme(axis.title.x = element_blank()) +
   theme(legend.position = "bottom")
 
 ```
@@ -270,12 +271,12 @@ GLODAP_SO_long %>%
 
 GLODAP_SO_long %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
-  ggplot(aes(date, value, col=latitude_grid_coarse))+
-  geom_vline(xintercept = ymd("2009-01-01"))+
-  geom_point()+
-  scale_color_viridis_d()+
-  facet_grid(depth_grid~var)+
-  theme(axis.title.x = element_blank())+
+  ggplot(aes(date, value, col=latitude_grid_coarse)) +
+  geom_vline(xintercept = ymd("2009-01-01")) +
+  geom_point() +
+  scale_color_viridis_d() +
+  facet_grid(depth_grid~var) +
+  theme(axis.title.x = element_blank()) +
   theme(legend.position = "bottom")
 
 ```
@@ -307,13 +308,13 @@ GLODAP_SO_long_mean_lat <- GLODAP_SO_long %>%
 
 GLODAP_SO_long_mean_lat %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
-  ggplot(aes(year, value_mean, col=latitude_grid_coarse))+
-  geom_vline(xintercept = 2009)+
-  geom_line()+
-  geom_point()+
-  scale_color_viridis_d()+
-  facet_grid(depth_grid~var)+
-  theme(axis.title.x = element_blank())+
+  ggplot(aes(year, value_mean, col=latitude_grid_coarse)) +
+  geom_vline(xintercept = 2009) +
+  geom_line() +
+  geom_point() +
+  scale_color_viridis_d() +
+  facet_grid(depth_grid~var) +
+  theme(axis.title.x = element_blank()) +
   theme(legend.position = "bottom")
 
 ```
@@ -343,14 +344,14 @@ GLODAP_SO_long_mean <- GLODAP_SO_long %>%
 
 GLODAP_SO_long_mean %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
-  ggplot(aes(year, value_mean))+
-  geom_vline(xintercept = 2009)+
-  geom_line(aes(col=as.factor(depth_grid)))+
-  geom_point(aes(fill=as.factor(depth_grid)),shape=21)+
-  scale_fill_scico_d(palette = "batlow", name="Depth levels (m)", direction = -1)+
-  scale_color_scico_d(palette = "batlow", name="Depth levels (m)", direction = -1)+
-  facet_wrap(~var)+
-  theme(axis.title.x = element_blank())+
+  ggplot(aes(year, value_mean)) +
+  geom_vline(xintercept = 2009) +
+  geom_line(aes(col=as.factor(depth_grid))) +
+  geom_point(aes(fill=as.factor(depth_grid)),shape=21) +
+  scale_fill_scico_d(palette = "batlow", name="Depth levels (m)", direction = -1) +
+  scale_color_scico_d(palette = "batlow", name="Depth levels (m)", direction = -1) +
+  facet_wrap(~var) +
+  theme(axis.title.x = element_blank()) +
   theme(legend.position = "bottom")
 
 ```
@@ -379,13 +380,13 @@ GLODAP_SO_long_nr_lat <- GLODAP_SO_long %>%
 
 GLODAP_SO_long_nr_lat %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
-  ggplot(aes(year, count, col=latitude_grid_coarse))+
-  geom_vline(xintercept = 2009)+
-  geom_line()+
-  geom_point()+
-  scale_color_viridis_d()+
-  facet_grid(depth_grid~var)+
-  theme(axis.title.x = element_blank())+
+  ggplot(aes(year, count, col=latitude_grid_coarse)) +
+  geom_vline(xintercept = 2009) +
+  geom_line() +
+  geom_point() +
+  scale_color_viridis_d() +
+  facet_grid(depth_grid~var) +
+  theme(axis.title.x = element_blank()) +
   theme(legend.position = "bottom")
 
 ```
@@ -399,9 +400,9 @@ In order to order to gain a more precise idea about the spatial distribution of 
 
 GLODAP_SO_long %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
-  ggplot(aes(latitude, value, col=longitude_grid_coarse))+
-  geom_point()+
-  facet_grid(depth_grid~var)+
+  ggplot(aes(latitude, value, col=longitude_grid_coarse)) +
+  geom_point() +
+  facet_grid(depth_grid~var) +
   theme(legend.position = "bottom")
 
 ```
@@ -410,10 +411,10 @@ GLODAP_SO_long %>%
 
 GLODAP_SO_long %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
-  ggplot(aes(longitude, value, col=latitude_grid_coarse))+
-  geom_point()+
-  scale_color_viridis_d()+
-  facet_grid(depth_grid~var)+
+  ggplot(aes(longitude, value, col=latitude_grid_coarse)) +
+  geom_point() +
+  scale_color_viridis_d() +
+  facet_grid(depth_grid~var) +
   theme(legend.position = "bottom")
 
 ```
@@ -431,10 +432,10 @@ First impression:
 
 GLODAP_SO_long %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
-  ggplot(aes(temperature, value, col=latitude))+
-  geom_point()+
-  scale_color_viridis_c()+
-  facet_grid(depth_grid~var)+
+  ggplot(aes(temperature, value, col=latitude)) +
+  geom_point() +
+  scale_color_viridis_c() +
+  facet_grid(depth_grid~var) +
   theme(legend.position = "bottom")
 
 
@@ -446,9 +447,9 @@ GLODAP_SO_long %>%
 
 GLODAP_SO %>% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %>% 
-  ggplot(aes(talk, tco2, col=latitude))+
-  geom_point()+
-  scale_color_viridis_c()+
+  ggplot(aes(talk, tco2, col=latitude)) +
+  geom_point() +
+  scale_color_viridis_c() +
   facet_wrap(~depth_grid)
 
 ```
@@ -457,7 +458,9 @@ GLODAP_SO %>%
 # Open tasks / questions
 
 - Check duplicated analysis at identical sampling location and time
-- Check correct subsetting by flag: Do we only have paired tco2/talk observations?
+- transect plot for 2009 meridional cruise
+- plot worldmap and time series of GLODAP observation counts 2004-17
+- time series of zonal annual mean values referring to Orsi-fronts
 
 # Checks with Lydia
 

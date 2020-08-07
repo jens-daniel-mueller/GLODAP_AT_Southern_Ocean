@@ -28,13 +28,13 @@ theme_set(theme_bw())
 
 # Reading original data
 
-The file `GLODAPv2.2019_Merged_Master_File.csv` from [glodap.info](https://www.glodap.info/) was used.
+The file `GLODAPv2.2020_Merged_Master_File.csv` from [glodap.info](https://www.glodap.info/) was used.
 
 Only rows which have at least one `talk` or `tco2` observation were subsetted. 
 
 ```{r rewrite_GLODAP_master_file, eval=FALSE}
 
-GLODAP <- read_csv(here::here("data", "GLODAPv2.2019_Merged_Master_File.csv"),
+GLODAP <- read_csv(here::here("data", "GLODAPv2.2020_Merged_Master_File.csv"),
                    na = "-9999",
                    col_types = cols(.default = col_double()))
 
@@ -51,7 +51,9 @@ GLODAP <- GLODAP %>%
   mutate(date = ymd(paste(year, month, day)),
          decade = as.factor(floor(year / 10) * 10))
 
-GLODAP  %>%  write_csv(here::here("data/_summarized_data_files", "GLODAPv2.2019_Merged_Master_File_JM.csv"))
+GLODAP  %>% 
+  write_csv(here::here("data/_summarized_data_files",
+                       "GLODAPv2.2020_Merged_Master_File_JM.csv"))
 
 ```
 
@@ -62,7 +64,7 @@ Saptio-temporal distribution of `talk` and `tco2` data.
 ```{r reopen_GLODAP}
 
 GLODAP <- read_csv(here::here("data/_summarized_data_files",
-                              "GLODAPv2.2019_Merged_Master_File_JM.csv"),
+                              "GLODAPv2.2020_Merged_Master_File_JM.csv"),
                    guess_max = 1e5)
 
 GLODAP <- GLODAP %>% 
