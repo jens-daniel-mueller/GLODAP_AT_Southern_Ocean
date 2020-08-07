@@ -409,7 +409,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Southern Ocean CO2-system patterns and dynamics</h1>
 <h4 class="author">Jens Daniel Müller</h4>
-<h4 class="date">24 April, 2020</h4>
+<h4 class="date">07 August, 2020</h4>
 
 </div>
 
@@ -434,7 +434,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-04-24
+<strong>Last updated:</strong> 2020-08-07
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -444,7 +444,7 @@ div.tocify {
 </p>
 <p>
 This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
-  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.1). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
 </p>
 <hr>
 </div>
@@ -525,16 +525,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuellerGLODAPATSouthernOceantreefbd8223553bd49a73b777ae91e3aebeff7508602targetblankfbd8223a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/tree/fbd8223553bd49a73b777ae91e3aebeff7508602" target="_blank">fbd8223</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuellerGLODAPATSouthernOceantree64d97d9d9aad83cdf59dedf29e226483c79efbeftargetblank64d97d9a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/tree/64d97d9d9aad83cdf59dedf29e226483c79efbef" target="_blank">64d97d9</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuellerGLODAPATSouthernOceantreefbd8223553bd49a73b777ae91e3aebeff7508602targetblankfbd8223a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuellerGLODAPATSouthernOceantree64d97d9d9aad83cdf59dedf29e226483c79efbeftargetblank64d97d9a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/tree/fbd8223553bd49a73b777ae91e3aebeff7508602" target="_blank">fbd8223</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/tree/64d97d9d9aad83cdf59dedf29e226483c79efbef" target="_blank">64d97d9</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -582,6 +582,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/blob/64d97d9d9aad83cdf59dedf29e226483c79efbef/analysis/SO_AT.Rmd" target="_blank">64d97d9</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2020-08-07
+</td>
+<td>
+updated to version 2020 of GLODAP
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/GLODAP_AT_Southern_Ocean/1a08c260e99e0dcad301367f8664fa16b5256a75/docs/SO_AT.html" target="_blank">1a08c26</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2020-04-24
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1129,7 +1163,8 @@ qc &lt;- 1</code></pre>
 <li>quality flag qc: 1</li>
 </ul>
 <p>were investigated. Quality flags were checked individually for <code>tco2</code> and <code>talk</code>. The resulting data sets were merged, such that each accepted <code>tco2</code> and <code>talk</code> is kept and we have observations with only one of both parameters determined.</p>
-<pre class="r"><code>GLODAP &lt;- read_csv(here::here(&quot;data/_summarized_data_files&quot;, &quot;GLODAPv2.2019_Merged_Master_File_JM.csv&quot;),
+<pre class="r"><code>GLODAP &lt;- read_csv(here::here(&quot;data/_summarized_data_files&quot;,
+                              &quot;GLODAPv2.2020_Merged_Master_File_JM.csv&quot;),
                    guess_max = 1e5)
 
 # GLODAP_SO &lt;- GLODAP_SO %&gt;% 
@@ -1162,10 +1197,10 @@ GLODAP_SO &lt;- GLODAP_SO %&gt;%
 
 
 GLODAP_SO %&gt;% write_csv(here::here(&quot;data/_summarized_data_files&quot;,
-                                   &quot;GLODAPv2.2019_Merged_Master_File_JM_SO.csv&quot;))</code></pre>
+                                   &quot;GLODAPv2.2020_Merged_Master_File_JM_SO.csv&quot;))</code></pre>
 <pre class="r"><code>rm(depth_lower_limit, f, qc, SO_lat_high, SO_lat_low, year_end, year_start)
 
-GLODAP_SO &lt;- read_csv(here::here(&quot;data/_summarized_data_files&quot;, &quot;GLODAPv2.2019_Merged_Master_File_JM_SO.csv&quot;),
+GLODAP_SO &lt;- read_csv(here::here(&quot;data/_summarized_data_files&quot;, &quot;GLODAPv2.2020_Merged_Master_File_JM_SO.csv&quot;),
                    guess_max = 1e5)
 
 GLODAP_SO_long &lt;- GLODAP_SO %&gt;% 
@@ -1238,35 +1273,35 @@ GLODAP_SO &lt;- GLODAP_SO %&gt;%
 <pre class="r"><code>map_southpole &lt;- borders(&quot;world&quot;, colour=&quot;gray60&quot;, fill=&quot;gray60&quot;, ylim = c(-90,-25)) # create a layer of borders
 
 GLODAP_SO_long %&gt;% 
-  ggplot(aes(longitude, latitude, col=as.factor(year)))+
+  ggplot(aes(longitude, latitude, col=as.factor(year))) +
   map_southpole+
-  geom_hline(yintercept = seq(-65, -30, 5))+
-  geom_vline(xintercept = seq(-180, 180, 40))+
-  geom_point()+
+  geom_hline(yintercept = seq(-65, -30, 5)) +
+  geom_vline(xintercept = seq(-180, 180, 40)) +
+  geom_point() +
   coord_map(&quot;ortho&quot;, orientation = c(-90, 0, 0),
-            ylim = c(-85,-30), xlim = c(-180,180))+
-  scale_color_scico_d(palette = &quot;bamako&quot;, name=&quot;year&quot;)+
-  #scale_color_viridis_d(option = &quot;magma&quot;, name=&quot;year&quot;)+
+            ylim = c(-85,-30), xlim = c(-180,180)) +
+  scale_color_scico_d(palette = &quot;bamako&quot;, name=&quot;year&quot;) +
+  #scale_color_viridis_d(option = &quot;magma&quot;, name=&quot;year&quot;) +
   theme(axis.text = element_blank(),
         axis.title = element_blank(),
         axis.ticks = element_blank(),
-        panel.grid = element_blank())+
-  facet_wrap(~var)+
+        panel.grid = element_blank()) +
+  facet_wrap(~var) +
   theme(legend.position = &quot;bottom&quot;)</code></pre>
 <p><img src="figure/SO_AT.Rmd/observations_map-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>GLODAP_SO_long %&gt;% 
-  ggplot(aes(longitude, latitude))+
+  ggplot(aes(longitude, latitude)) +
   map_southpole+
-  geom_hline(yintercept = seq(-65, -30, 5))+
-  geom_vline(xintercept = seq(-180, 180, 40))+
-  geom_point()+
+  geom_hline(yintercept = seq(-65, -30, 5)) +
+  geom_vline(xintercept = seq(-180, 180, 40)) +
+  geom_point() +
   coord_map(&quot;ortho&quot;, orientation = c(-90, 0, 0),
-            ylim = c(-85,-30), xlim = c(-180,180))+
-  scale_color_viridis_d(name=&quot;year&quot;)+
+            ylim = c(-85,-30), xlim = c(-180,180)) +
+  scale_color_viridis_d(name=&quot;year&quot;) +
   theme(axis.text = element_blank(),
         axis.title = element_blank(),
         axis.ticks = element_blank(),
-        panel.grid = element_blank())+
+        panel.grid = element_blank()) +
   facet_wrap(~year, ncol = 3)</code></pre>
 <p><img src="figure/SO_AT.Rmd/observations_map_year_grid-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
@@ -1286,21 +1321,21 @@ GLODAP_SO_long %&gt;%
 </ul>
 <pre class="r"><code>GLODAP_SO_long %&gt;% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %&gt;% 
-  ggplot(aes(date, value, col=longitude_grid_coarse))+
-  geom_vline(xintercept = ymd(&quot;2009-01-01&quot;))+
-  geom_point()+
-  facet_grid(depth_grid~var)+
-  theme(axis.title.x = element_blank())+
+  ggplot(aes(date, value, col=longitude_grid_coarse)) +
+  geom_vline(xintercept = ymd(&quot;2009-01-01&quot;)) +
+  geom_point() +
+  facet_grid(depth_grid~var) +
+  theme(axis.title.x = element_blank()) +
   theme(legend.position = &quot;bottom&quot;)</code></pre>
 <p><img src="figure/SO_AT.Rmd/tCO2_time_series_lon_grid-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>GLODAP_SO_long %&gt;% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %&gt;% 
-  ggplot(aes(date, value, col=latitude_grid_coarse))+
-  geom_vline(xintercept = ymd(&quot;2009-01-01&quot;))+
-  geom_point()+
-  scale_color_viridis_d()+
-  facet_grid(depth_grid~var)+
-  theme(axis.title.x = element_blank())+
+  ggplot(aes(date, value, col=latitude_grid_coarse)) +
+  geom_vline(xintercept = ymd(&quot;2009-01-01&quot;)) +
+  geom_point() +
+  scale_color_viridis_d() +
+  facet_grid(depth_grid~var) +
+  theme(axis.title.x = element_blank()) +
   theme(legend.position = &quot;bottom&quot;)</code></pre>
 <p><img src="figure/SO_AT.Rmd/tCO2_time_series_lat_grid-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
@@ -1322,13 +1357,13 @@ GLODAP_SO_long %&gt;%
   filter(!is.na(value_mean))</code></pre>
 <pre class="r"><code>GLODAP_SO_long_mean_lat %&gt;% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %&gt;% 
-  ggplot(aes(year, value_mean, col=latitude_grid_coarse))+
-  geom_vline(xintercept = 2009)+
-  geom_line()+
-  geom_point()+
-  scale_color_viridis_d()+
-  facet_grid(depth_grid~var)+
-  theme(axis.title.x = element_blank())+
+  ggplot(aes(year, value_mean, col=latitude_grid_coarse)) +
+  geom_vline(xintercept = 2009) +
+  geom_line() +
+  geom_point() +
+  scale_color_viridis_d() +
+  facet_grid(depth_grid~var) +
+  theme(axis.title.x = element_blank()) +
   theme(legend.position = &quot;bottom&quot;)</code></pre>
 <p><img src="figure/SO_AT.Rmd/time_series_annual_mean_lat_grid-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
@@ -1348,14 +1383,14 @@ GLODAP_SO_long %&gt;%
   filter(!is.na(value_mean))</code></pre>
 <pre class="r"><code>GLODAP_SO_long_mean %&gt;% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %&gt;% 
-  ggplot(aes(year, value_mean))+
-  geom_vline(xintercept = 2009)+
-  geom_line(aes(col=as.factor(depth_grid)))+
-  geom_point(aes(fill=as.factor(depth_grid)),shape=21)+
-  scale_fill_scico_d(palette = &quot;batlow&quot;, name=&quot;Depth levels (m)&quot;, direction = -1)+
-  scale_color_scico_d(palette = &quot;batlow&quot;, name=&quot;Depth levels (m)&quot;, direction = -1)+
-  facet_wrap(~var)+
-  theme(axis.title.x = element_blank())+
+  ggplot(aes(year, value_mean)) +
+  geom_vline(xintercept = 2009) +
+  geom_line(aes(col=as.factor(depth_grid))) +
+  geom_point(aes(fill=as.factor(depth_grid)),shape=21) +
+  scale_fill_scico_d(palette = &quot;batlow&quot;, name=&quot;Depth levels (m)&quot;, direction = -1) +
+  scale_color_scico_d(palette = &quot;batlow&quot;, name=&quot;Depth levels (m)&quot;, direction = -1) +
+  facet_wrap(~var) +
+  theme(axis.title.x = element_blank()) +
   theme(legend.position = &quot;bottom&quot;)</code></pre>
 <p><img src="figure/SO_AT.Rmd/time_series_annual_mean-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
@@ -1375,13 +1410,13 @@ GLODAP_SO_long %&gt;%
   ungroup()</code></pre>
 <pre class="r"><code>GLODAP_SO_long_nr_lat %&gt;% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %&gt;% 
-  ggplot(aes(year, count, col=latitude_grid_coarse))+
-  geom_vline(xintercept = 2009)+
-  geom_line()+
-  geom_point()+
-  scale_color_viridis_d()+
-  facet_grid(depth_grid~var)+
-  theme(axis.title.x = element_blank())+
+  ggplot(aes(year, count, col=latitude_grid_coarse)) +
+  geom_vline(xintercept = 2009) +
+  geom_line() +
+  geom_point() +
+  scale_color_viridis_d() +
+  facet_grid(depth_grid~var) +
+  theme(axis.title.x = element_blank()) +
   theme(legend.position = &quot;bottom&quot;)</code></pre>
 <p><img src="figure/SO_AT.Rmd/time_series_lat_grid_counts-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
@@ -1392,17 +1427,17 @@ GLODAP_SO_long %&gt;%
 <p>In order to order to gain a more precise idea about the spatial distribution of <code>tco2</code> and <code>talk</code>, both parameters were plotted against latitude and colored by longitude, and vice versa.</p>
 <pre class="r"><code>GLODAP_SO_long %&gt;% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %&gt;% 
-  ggplot(aes(latitude, value, col=longitude_grid_coarse))+
-  geom_point()+
-  facet_grid(depth_grid~var)+
+  ggplot(aes(latitude, value, col=longitude_grid_coarse)) +
+  geom_point() +
+  facet_grid(depth_grid~var) +
   theme(legend.position = &quot;bottom&quot;)</code></pre>
 <p><img src="figure/SO_AT.Rmd/latitudinal_patterns-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>GLODAP_SO_long %&gt;% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %&gt;% 
-  ggplot(aes(longitude, value, col=latitude_grid_coarse))+
-  geom_point()+
-  scale_color_viridis_d()+
-  facet_grid(depth_grid~var)+
+  ggplot(aes(longitude, value, col=latitude_grid_coarse)) +
+  geom_point() +
+  scale_color_viridis_d() +
+  facet_grid(depth_grid~var) +
   theme(legend.position = &quot;bottom&quot;)</code></pre>
 <p><img src="figure/SO_AT.Rmd/longitudinal_patterns-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
@@ -1414,10 +1449,10 @@ GLODAP_SO_long %&gt;%
 <p>First impression: - DIC depends more strongly on temperature, likely due to the higher solubilty of cold waters</p>
 <pre class="r"><code>GLODAP_SO_long %&gt;% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %&gt;% 
-  ggplot(aes(temperature, value, col=latitude))+
-  geom_point()+
-  scale_color_viridis_c()+
-  facet_grid(depth_grid~var)+
+  ggplot(aes(temperature, value, col=latitude)) +
+  geom_point() +
+  scale_color_viridis_c() +
+  facet_grid(depth_grid~var) +
   theme(legend.position = &quot;bottom&quot;)</code></pre>
 <p><img src="figure/SO_AT.Rmd/tco2_talk_vs_temp_correlation-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
@@ -1425,9 +1460,9 @@ GLODAP_SO_long %&gt;%
 <h2><span class="header-section-number">6.2</span> tco2 vs talk</h2>
 <pre class="r"><code>GLODAP_SO %&gt;% 
   filter(depth_grid %in% c(10, 100, 300, 500)) %&gt;% 
-  ggplot(aes(talk, tco2, col=latitude))+
-  geom_point()+
-  scale_color_viridis_c()+
+  ggplot(aes(talk, tco2, col=latitude)) +
+  geom_point() +
+  scale_color_viridis_c() +
   facet_wrap(~depth_grid)</code></pre>
 <p><img src="figure/SO_AT.Rmd/tco2_vs_talk_correlation-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
@@ -1436,7 +1471,9 @@ GLODAP_SO_long %&gt;%
 <h1><span class="header-section-number">7</span> Open tasks / questions</h1>
 <ul>
 <li>Check duplicated analysis at identical sampling location and time</li>
-<li>Check correct subsetting by flag: Do we only have paired tco2/talk observations?</li>
+<li>transect plot for 2009 meridional cruise</li>
+<li>plot worldmap and time series of GLODAP observation counts 2004-17</li>
+<li>time series of zonal annual mean values referring to Orsi-fronts</li>
 </ul>
 </div>
 <div id="checks-with-lydia" class="section level1">
@@ -1452,8 +1489,8 @@ GLODAP_SO_long %&gt;%
 </p>
 <div id="workflowr-sessioninfo" class="collapse">
 <pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 3.6.3 (2020-02-29)
-Platform: i386-w64-mingw32/i386 (32-bit)
+<pre><code>R version 4.0.2 (2020-06-22)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
 Running under: Windows 10 x64 (build 18363)
 
 Matrix products: default
@@ -1467,27 +1504,27 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] scico_1.1.0     lubridate_1.7.4 forcats_0.5.0   stringr_1.4.0  
- [5] dplyr_0.8.5     purrr_0.3.3     readr_1.3.1     tidyr_1.0.2    
- [9] tibble_3.0.0    ggplot2_3.3.0   tidyverse_1.3.0 workflowr_1.6.1
+ [1] scico_1.2.0     lubridate_1.7.9 forcats_0.5.0   stringr_1.4.0  
+ [5] dplyr_1.0.0     purrr_0.3.4     readr_1.3.1     tidyr_1.1.0    
+ [9] tibble_3.0.3    ggplot2_3.3.2   tidyverse_1.3.0 workflowr_1.6.2
 
 loaded via a namespace (and not attached):
- [1] jsonlite_1.6.1    rstudioapi_0.11   generics_0.0.2    magrittr_1.5     
- [5] farver_2.0.3      gtable_0.3.0      rmarkdown_2.1     vctrs_0.2.4      
- [9] fs_1.4.0          hms_0.5.3         xml2_1.3.0        pillar_1.4.3     
-[13] htmltools_0.4.0   haven_2.2.0       later_1.0.0       broom_0.5.5      
-[17] cellranger_1.1.0  lattice_0.20-41   tidyselect_1.0.0  knitr_1.28       
-[21] git2r_0.26.1      whisker_0.4       lifecycle_0.2.0   pkgconfig_2.0.3  
-[25] R6_2.4.1          digest_0.6.25     xfun_0.12         colorspace_1.4-1 
-[29] rprojroot_1.3-2   stringi_1.4.6     yaml_2.2.1        evaluate_0.14    
-[33] labeling_0.3      fansi_0.4.1       httr_1.4.1        compiler_3.6.3   
-[37] here_0.1          cli_2.0.2         withr_2.1.2       backports_1.1.5  
-[41] munsell_0.5.0     DBI_1.1.0         modelr_0.1.6      Rcpp_1.0.4       
-[45] readxl_1.3.1      mapproj_1.2.7     maps_3.3.0        dbplyr_1.4.2     
-[49] ellipsis_0.3.0    assertthat_0.2.1  tools_3.6.3       reprex_0.3.0     
-[53] viridisLite_0.3.0 httpuv_1.5.2      scales_1.1.0      crayon_1.3.4     
-[57] glue_1.3.2        rlang_0.4.5       nlme_3.1-145      rvest_0.3.5      
-[61] promises_1.1.0    grid_3.6.3       </code></pre>
+ [1] Rcpp_1.0.5        here_0.1          assertthat_0.2.1  rprojroot_1.3-2  
+ [5] digest_0.6.25     R6_2.4.1          cellranger_1.1.0  backports_1.1.8  
+ [9] reprex_0.3.0      evaluate_0.14     httr_1.4.2        pillar_1.4.6     
+[13] rlang_0.4.7       readxl_1.3.1      rstudioapi_0.11   whisker_0.4      
+[17] blob_1.2.1        rmarkdown_2.3     labeling_0.3      munsell_0.5.0    
+[21] broom_0.7.0       compiler_4.0.2    httpuv_1.5.4      modelr_0.1.8     
+[25] xfun_0.16         pkgconfig_2.0.3   htmltools_0.5.0   tidyselect_1.1.0 
+[29] viridisLite_0.3.0 fansi_0.4.1       crayon_1.3.4      dbplyr_1.4.4     
+[33] withr_2.2.0       later_1.1.0.1     grid_4.0.2        jsonlite_1.7.0   
+[37] gtable_0.3.0      lifecycle_0.2.0   DBI_1.1.0         git2r_0.27.1     
+[41] magrittr_1.5      scales_1.1.1      cli_2.0.2         stringi_1.4.6    
+[45] farver_2.0.3      mapproj_1.2.7     fs_1.4.2          promises_1.1.1   
+[49] xml2_1.3.2        ellipsis_0.3.1    generics_0.0.2    vctrs_0.3.2      
+[53] tools_4.0.2       glue_1.4.1        maps_3.3.0        hms_0.5.3        
+[57] yaml_2.2.1        colorspace_1.4-1  rvest_0.3.6       knitr_1.29       
+[61] haven_2.3.1      </code></pre>
 </div>
 </div>
 
@@ -1558,7 +1595,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
